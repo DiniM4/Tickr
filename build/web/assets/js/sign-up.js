@@ -1,5 +1,9 @@
 // Handle the register button click
 async function signUp() {
+    
+    event.preventDefault(); // prevent page reload
+    
+    
     const firstName = document.getElementById("firstName").value.trim();
     const lastName = document.getElementById("lastName").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -29,9 +33,10 @@ async function signUp() {
             messageElement.className = "text-success text-center mt-lg-3 mb-lg-34";
             messageElement.innerHTML = json.message;
 
-            // Show the modal
-            const verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'));
-            verificationModal.show();
+            // ✅ Show the verification modal
+//            const verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'));
+//            verificationModal.show();
+            window.location = "verify-account.html";
         } else {
             // Error
             messageElement.className = "text-danger text-center mt-lg-3 mb-lg-34";
@@ -44,39 +49,39 @@ async function signUp() {
         console.error("Error during sign-up:", error);
     }
 }
-
-// Handle verification code submission inside modal
-document.addEventListener("DOMContentLoaded", () => {
-    const verificationForm = document.getElementById("verificationForm");
-
-    if (verificationForm) {
-        verificationForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const code = document.getElementById("verificationCode").value.trim();
-            const email = document.getElementById("email").value.trim();
-
-            try {
-                const response = await fetch("VerifyCode", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({code: code, email: email})
-                });
-
-                const result = await response.json();
-
-                if (result.status) {
-                    alert("Account verified successfully!");
-                    window.location.href = "index.html";
-                } else {
-                    alert("Invalid verification code. Please try again.");
-                }
-            } catch (error) {
-                alert("An error occurred while verifying. Please try again.");
-                console.error("Verification error:", error);
-            }
-        });
-    }
-});
+//
+//// Handle verification code submission inside modal
+//document.addEventListener("DOMContentLoaded", () => {
+//    const verificationForm = document.getElementById("verificationForm");
+//
+//    if (verificationForm) {
+//        verificationForm.addEventListener("submit", async function (e) {
+//            e.preventDefault();
+//
+//            const code = document.getElementById("verificationCode").value.trim();
+//            const email = document.getElementById("email").value.trim();
+//
+//            try {
+//                const response = await fetch("VerifyCode", {
+//                    method: "POST",
+//                    headers: {
+//                        "Content-Type": "application/json"
+//                    },
+//                    body: JSON.stringify({code: code, email: email})
+//                });
+//
+//                const result = await response.json();
+//
+//                if (result.status) {
+//                    alert("Account verified successfully!");
+//                    window.location.href = "index.html";
+//                } else {
+//                    alert("Invalid verification code. Please try again.");
+//                }
+//            } catch (error) {
+//                alert("An error occurred while verifying. Please try again.");
+//                console.error("Verification error:", error);
+//            }
+//        });
+//    }
+//});

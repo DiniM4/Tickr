@@ -39,11 +39,8 @@ public class VerifyAccount extends HttpServlet {
         responseObject.addProperty("status", false);
 
         HttpSession ses = request.getSession();
-
         if (ses.getAttribute("email") == null) {
-//            responseObject.addProperty("message", "Email not found");
             responseObject.addProperty("message", "1");
-
         } else {
 
             String email = ses.getAttribute("email").toString();

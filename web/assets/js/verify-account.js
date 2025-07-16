@@ -1,28 +1,3 @@
-
- // Show modal on Register button click
-        document.addEventListener('DOMContentLoaded', function () {
-            var signupForm = document.querySelector('.signup-form');
-            if (signupForm) {
-                signupForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    var verificationModal = new bootstrap.Modal(document.getElementById('verificationModal'));
-                    verificationModal.show();
-                });
-            }
-//            Optionally handle verification form submit
-            var verificationForm = document.getElementById('verificationForm');
-            if (verificationForm) {
-                verificationForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    // Add your verification logic here
-                    // For now, just close the modal
-                    var modal = bootstrap.Modal.getInstance(document.getElementById('verificationModal'));
-                    modal.hide();
-//                    alert('Verification code submitted!');
-                });
-            }
-        });
-
 async function verifyAccount() {
 
     const verificationCode = document.getElementById("verificationCode").value;
@@ -67,7 +42,4 @@ async function verifyAccount() {
     } else {
         document.getElementById("message").innerHTML = "Verification failed.";
     }
-
-
 }
-
