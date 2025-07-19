@@ -36,6 +36,9 @@ public class User implements Serializable {
 
     @Column(name = "created_at", nullable = false)
     private Date created_at;
+    @Column(name = "mobile", length = 15, nullable = false)
+
+    private String mobile;
 
     public User() {
 
@@ -95,6 +98,20 @@ public class User implements Serializable {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    /**
+     * @return the mobile
+     */
+    public String getMobile() {
+        return mobile;
+    }
+
+    /**
+     * @param mobile the mobile to set
+     */
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
 }

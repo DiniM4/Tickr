@@ -42,4 +42,6 @@ async function verifyAccount() {
     } else {
         document.getElementById("message").innerHTML = "Verification failed.";
     }
+
+
 }

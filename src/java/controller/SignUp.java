@@ -38,6 +38,7 @@ public class SignUp extends HttpServlet {
         String firstName = user.get("firstName").getAsString();
         String lastName = user.get("lastName").getAsString();
         final String email = user.get("email").getAsString();
+        String mobile = user.get("mobile").getAsString();
         String password = user.get("password").getAsString();
 
         JsonObject responseObject = new JsonObject();
@@ -55,6 +56,11 @@ public class SignUp extends HttpServlet {
         } else if (!Util.isEmailValid(email)) {
             responseObject.addProperty("message", "Please enter a valid email!");
 
+        } else if (mobile.isEmpty()) {
+            responseObject.addProperty("message", "Mobile can not be empty!");
+        } else if (!Util.isMobileValid(mobile)) {
+            responseObject.addProperty("message", "Please enter a valid Mobile number!");
+
         } else if (password.isEmpty()) {
             responseObject.addProperty("message", "Password can not be empty!");
 
@@ -68,7 +74,7 @@ public class SignUp extends HttpServlet {
 //            Session session = HibernateUtil.getSessionFactory().openSession();
             SessionFactory sf = HibernateUtil.getSessionFactory();
             Session s = sf.openSession();
-            Transaction tx = null;
+//            Transaction tx = null;
 
             Criteria criteria = s.createCriteria(User.class);
             criteria.add(Restrictions.eq("email", email));
@@ -77,25 +83,22 @@ public class SignUp extends HttpServlet {
                 responseObject.addProperty("message", "User with this Email already exists!");
             } else {
 
-                final String verificationCode = Util.generateCode();
-
                 User u = new User();
                 u.setFirst_name(firstName);
                 u.setLast_name(lastName);
                 u.setEmail(email);
+                u.setMobile(mobile);
                 u.setPassword(password);
 
                 //generate verification code
-//                final String verificationCode = Util.generateCode();
+                final String verificationCode = Util.generateCode();
                 u.setVerification(verificationCode);
 
                 //generate verification code
                 u.setCreated_at(new Date());
 
-                tx = s.beginTransaction();
                 s.save(u);
-                tx.commit();
-
+                s.beginTransaction().commit();
 //                s.beginTransaction().commit();
                 //hibernate Save
                 //Send Email
@@ -108,12 +111,14 @@ public class SignUp extends HttpServlet {
                 }).start();
                 //send Email
 
+                //Create a Session
+                HttpSession ses = request.getSession();
+                ses.setAttribute("email", email);
+                //Create a Session
+
                 responseObject.addProperty("status", true);
                 responseObject.addProperty("message", "Registration Sussess.Please check your email for the verification code");
 
-                // Save email to session
-                HttpSession session = request.getSession();
-                session.setAttribute("email", email);
             }
 
             s.close();

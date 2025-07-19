@@ -32,6 +32,8 @@ public class VerifyAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
 
         Gson gson = new Gson();
 
@@ -39,8 +41,11 @@ public class VerifyAccount extends HttpServlet {
         responseObject.addProperty("status", false);
 
         HttpSession ses = request.getSession();
+
         if (ses.getAttribute("email") == null) {
+//            responseObject.addProperty("message", "Email not found");
             responseObject.addProperty("message", "1");
+
         } else {
 
             String email = ses.getAttribute("email").toString();
@@ -85,4 +90,5 @@ public class VerifyAccount extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write(responseText);
     }
+
 }
