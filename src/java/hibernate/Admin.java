@@ -25,15 +25,11 @@ public class Admin implements Serializable {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status Status;
+  
 
     public Admin() {
     }
 
-    
-    
     /**
      * @return the id
      */
@@ -76,18 +72,5 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    /**
-     * @return the Status
-     */
-    public Status getStatus() {
-        return Status;
-    }
-
-    /**
-     * @param Status the Status to set
-     */
-    public void setStatus(Status Status) {
-        this.Status = Status;
-    }
-
+    
 }

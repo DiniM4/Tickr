@@ -30,7 +30,6 @@ public class AdminSignIn extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Gson gson = new Gson();
         JsonObject jsonRequest = gson.fromJson(req.getReader(), JsonObject.class);
 
@@ -39,8 +38,7 @@ public class AdminSignIn extends HttpServlet {
 
         String email = jsonRequest.get("adminemail").getAsString();
         String password = jsonRequest.get("adminpassword").getAsString();
-        
-        
+
         if (email == null || email.isEmpty()) {
             jsonResponse.addProperty("message", "Email cannot be empty!");
         } else if (password == null || password.isEmpty()) {
@@ -57,8 +55,7 @@ public class AdminSignIn extends HttpServlet {
 
             if (admin == null) {
                 jsonResponse.addProperty("message", "Invalid credentials!");
-            } else if (admin.getStatus() == null || admin.getStatus().getId() != 1) {
-                jsonResponse.addProperty("message", "Admin access not granted!");
+
             } else {
                 // success
                 HttpSession session = req.getSession();
@@ -72,6 +69,7 @@ public class AdminSignIn extends HttpServlet {
         }
         resp.setContentType("application/json");
         resp.getWriter().write(gson.toJson(jsonResponse));
+
     }
 
 }
