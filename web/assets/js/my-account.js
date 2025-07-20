@@ -1,6 +1,7 @@
 function loadData() {
     getUserData();
     getCityData();
+    getAddressData();
 
 }
 
@@ -17,6 +18,7 @@ async function getUserData() {
         document.getElementById("currentPassword").value = json.password;
         document.getElementById("phone").value = json.phone;
         document.getElementById("email").value = json.email;
+
 
 
 
@@ -62,7 +64,7 @@ async function getUserData() {
 
             document.getElementById("addName").innerHTML = `${json.firstName} ${json.lastName}`;
             document.getElementById("addEmail").innerHTML = `Email: ${email}`;
-            document.getElementById("contact").innerHTML = `Phone: 078956666`;
+            document.getElementById("phone").innerHTML = `Phone: ${mobile}`;
 
             document.getElementById("lineOne").value = lineOne;
             document.getElementById("lineTwo").value = lineTwo;
@@ -104,6 +106,27 @@ async function getCityData() {
         console.error("Failed to fetch CityData");
     }
 }
+
+async function  getAddressData() {
+
+    const response = await fetch("AddressData");
+
+    if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+
+        document.getElementById("lineOne").value = json.lineOne;
+        document.getElementById("lineTwo").value = json.lineTwo;
+        document.getElementById("postalCode").value = json.postalCode;
+
+
+    }else{
+             console.error("Failed to fetch address");
+   
+    }
+}
+
+
 
 async function saveChanges() {
 

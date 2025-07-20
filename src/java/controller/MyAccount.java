@@ -76,6 +76,8 @@ public class MyAccount extends HttpServlet {
 
         String firstName = userData.get("firstName").getAsString();
         String lastName = userData.get("lastName").getAsString();
+        String email = userData.get("email").getAsString();
+        String phone = userData.get("phone").getAsString();
         String lineOne = userData.get("lineOne").getAsString();
         String lineTwo = userData.get("lineTwo").getAsString();
         String postalCode = userData.get("postalCode").getAsString();
@@ -93,6 +95,16 @@ public class MyAccount extends HttpServlet {
 
         } else if (lastName.isEmpty()) {
             responseObject.addProperty("message", "Last Name can not be empty ! ");
+        } else if (email.isEmpty()) {
+            responseObject.addProperty("message", "Email can not be empty ! ");
+        } else if (!Util.isEmailValid(email)) {
+            responseObject.addProperty("message", "Please enter a valid email!");
+
+        } else if (phone.isEmpty()) {
+            responseObject.addProperty("message", "Mobile Number can not be empty ! ");
+
+        } else if (!Util.isMobileValid(phone)) {
+            responseObject.addProperty("message", "Please enter a valid Mobile Number!");
         } else if (lineOne.isEmpty()) {
             responseObject.addProperty("message", "Line One can not be empty!");
         } else if (lineTwo.isEmpty()) {
