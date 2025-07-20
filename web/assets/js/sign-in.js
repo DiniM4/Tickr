@@ -45,7 +45,7 @@ async function signIn() {
 
         }
     } else {
-        document.getElementById("message").innerHTML = "Registration failed.Please try again";
+        document.getElementById("message").innerHTML = "Sign In failed.Please try again";
     }
 
 }
