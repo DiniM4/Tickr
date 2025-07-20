@@ -11,10 +11,14 @@ async function getUserData() {
         const json = await response.json();
         console.log(json);
         document.getElementById("username").innerHTML = `Hello ${json.firstName} ${json.lastName}`;
-        document.getElementById("since").innerHTML = `Smart Trade Member Since ${json.since}`;
+        document.getElementById("since").innerHTML = `Tickr Member Since ${json.since}`;
         document.getElementById("firstName").value = json.firstName;
         document.getElementById("lastName").value = json.lastName;
         document.getElementById("currentPassword").value = json.password;
+        document.getElementById("phone").value = json.phone;
+        document.getElementById("email").value = json.email;
+
+
 
         if (json.hasOwnProperty("addressList") && json.addressList !== undefined) {
 
@@ -31,9 +35,9 @@ async function getUserData() {
                 email = address.user.email;
 
                 lineOne = address.lineOne;
-               lineTwo = address.lineTwo;
-               city = address.city.name;
-               postalCode = address.postalCode;
+                lineTwo = address.lineTwo;
+                city = address.city.name;
+                postalCode = address.postalCode;
 
                 cityId = address.city.id;
 
@@ -68,30 +72,37 @@ async function getUserData() {
         }
 
 
+
+
     } else {
 
     }
 }
 
 async function getCityData() {
-
     const response = await fetch("CityData");
-
+    console.log("CityData response status:", response.status);
     if (response.ok) {
         const json = await response.json();
+        console.log("CityData JSON:", json);
         const citySelect = document.getElementById("citySelect");
-
+        if (!citySelect) {
+            console.error("citySelect element not found!");
+            return;
+        }
+        if (!Array.isArray(json)) {
+            console.error("CityData response is not an array!");
+            return;
+        }
         json.forEach(city => {
             let option = document.createElement("option");
             option.innerHTML = city.name;
             option.value = city.id;
             citySelect.appendChild(option);
         });
-
-
-
+    } else {
+        console.error("Failed to fetch CityData");
     }
-
 }
 
 async function saveChanges() {

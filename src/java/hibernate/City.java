@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package hibernate;
 
 import java.io.Serializable;
@@ -16,17 +13,28 @@ import javax.persistence.Table;
 @Table(name = "city")
 public class City implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "name", length = 45, nullable = false)
+    private String name;
+
     public City() {
     }
 
+  
     public int getId() {
         return id;
     }
 
+   
     public void setId(int id) {
         this.id = id;
     }
 
+  
     public String getName() {
         return name;
     }
@@ -35,11 +43,5 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
 
-    @Column(name = "name", length = 45, nullable = false)
-    private String name;
 }
