@@ -6,7 +6,6 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import hibernate.Admin;
 import hibernate.HibernateUtil;
 import java.io.IOException;

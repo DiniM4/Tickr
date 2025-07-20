@@ -6,9 +6,17 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/tickerdb?useSSL=false</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">SMsuperX@262</property>
+        <property name="hibernate.connection.password">2003108</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="hibernate.User"/>
+        <mapping class="hibernate.City" />
+        <mapping class="hibernate.Address" />
+        <mapping class="hibernate.Brand" />
+        <mapping class="hibernate.Model" />
+        <mapping class="hibernate.Color" />
+        <mapping class="hibernate.Quality" />
+        <mapping class="hibernate.Status" />
+        <mapping class="hibernate.Storage" />
     </session-factory>
 </hibernate-configuration>
 

@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>User Profile - Travolo</title>
+        <title>Tickr |Modern Watch|User Profile </title>
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
+
         <style>
             body {
                 background: #f7f8fa;
                 font-family: "Jost", sans-serif;
             }
+
             .profile-sidebar {
                 background: #fff;
                 border-radius: 16px;
@@ -20,6 +23,7 @@
                 min-height: 500px;
                 transition: box-shadow 0.3s;
             }
+
             .profile-sidebar .nav-link {
                 color: #222;
                 font-weight: 500;
@@ -30,11 +34,13 @@
                 align-items: center;
                 gap: 10px;
             }
+
             .profile-sidebar .nav-link.active,
             .profile-sidebar .nav-link:hover {
                 background: #ff7f32;
                 color: #fff;
             }
+
             .profile-content {
                 background: #fff;
                 border-radius: 16px;
@@ -43,16 +49,19 @@
                 min-height: 500px;
                 animation: fadeIn 0.5s;
             }
+
             @keyframes fadeIn {
                 from {
                     opacity: 0;
                     transform: translateY(30px);
                 }
+
                 to {
                     opacity: 1;
                     transform: translateY(0);
                 }
             }
+
             .profile-avatar {
                 width: 100px;
                 height: 100px;
@@ -63,6 +72,7 @@
                 box-shadow: 0 2px 8px rgba(13, 110, 253, 0.1);
                 animation: popIn 0.6s;
             }
+
             .upload-btn {
                 display: inline-block;
                 margin-bottom: 16px;
@@ -75,38 +85,47 @@
                 cursor: pointer;
                 transition: background 0.2s;
             }
+
             .upload-btn:hover {
                 background: #0d6efd;
                 color: #fff;
             }
+
             @keyframes popIn {
                 0% {
                     transform: scale(0.7);
                     opacity: 0;
                 }
+
                 80% {
                     transform: scale(1.1);
                     opacity: 1;
                 }
+
                 100% {
                     transform: scale(1);
                 }
             }
+
             .profile-header {
                 text-align: center;
                 margin-bottom: 32px;
             }
+
             .profile-header h3 {
                 margin-bottom: 4px;
                 font-weight: 700;
             }
+
             .profile-header p {
                 color: #888;
                 font-size: 15px;
             }
-            .tab-content > .tab-pane {
+
+            .tab-content>.tab-pane {
                 animation: fadeIn 0.5s;
             }
+
             .logout-btn {
                 color: #fff;
                 font-weight: 600;
@@ -117,23 +136,23 @@
                 margin-top: 24px;
                 transition: background 0.2s, color 0.2s;
             }
+
             .logout-btn:hover {
                 background: #0d6efd;
                 color: #fff;
             }
+
             .btn-primary,
             .btn-outline-primary {
                 background: #0d6efd;
                 border-color: #0d6efd;
             }
+
             .btn-primary:hover,
             .btn-outline-primary:hover {
                 background: #ff7f32;
                 border-color: #ff7f32;
             }
-
-
-
         </style>
         <!-- <link rel="stylesheet" href="assets/css/app.min.css"> -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -148,7 +167,7 @@
 
     </head>
 
-    <body>
+    <body onload="loadData();">
         <div id="header-placeholder"></div>
         <!-- Header will be loaded here by topBottom.js -->
         <div class="container py-5">
@@ -156,94 +175,35 @@
                 <div class="col-lg-3">
                     <div class="profile-sidebar">
                         <div class="profile-header">
-                            <img
-                                id="profileImage"
-                                src="assets/img/author/author1.jpg"
-                                alt="User Avatar"
-                                class="profile-avatar"
-                                />
-                            <form id="uploadForm" enctype="multipart/form-data">
-                                <input
-                                    type="file"
-                                    id="profilePicInput"
-                                    accept="image/*"
-                                    style="display: none"
-                                    />
-                                <!-- <button class= type="submit">Submit</button> -->
 
-                                <button
-                                    type="button"
-                                    class="upload-btn"
-                                    onclick="document.getElementById('profilePicInput').click()"
-                                    >
-                                    Upload New Picture
-                                </button>
-                            </form>
-                            <h3 id="userName">Hello, Name</h3>
-                            <p>
-                                Travolo Member Since <span id="memberSince">Sep 2024</span>
+
+                            <h3 id="username"> Hello, Name</h3>
+                            <p class="joining-date" id="since"> Tiker Member Since Sep 2024
                             </p>
                         </div>
-                        <ul
-                            class="nav flex-column nav-pills"
-                            id="profileTabs"
-                            role="tablist"
-                            >
+                        <ul class="nav flex-column nav-pills" id="profileTabs" role="tablist">
                             <li class="nav-item mb-1">
-                                <a
-                                    class="nav-link active"
-                                    id="account-tab"
-                                    data-bs-toggle="pill"
-                                    href="#account"
-                                    role="tab"
-                                    ><i class="fas fa-user"></i> Account Details</a
-                                >
+                                <a class="nav-link active" id="account-tab" data-bs-toggle="pill" href="#account"
+                                   role="tab"><i class="fas fa-user"></i> Account Details</a>
                             </li>
                             <li class="nav-item mb-1">
-                                <a
-                                    class="nav-link"
-                                    id="watches-tab"
-                                    data-bs-toggle="pill"
-                                    href="#watches"
-                                    role="tab"
-                                    ><i class="fas fa-clock"></i> Watches</a
-                                >
+                                <a class="nav-link" id="watches-tab" data-bs-toggle="pill" href="#watches" role="tab"><i
+                                        class="fas fa-clock"></i> Watches</a>
                             </li>
                             <li class="nav-item mb-1">
-                                <a
-                                    class="nav-link"
-                                    id="watchlist-tab"
-                                    data-bs-toggle="pill"
-                                    href="#watchlist"
-                                    role="tab"
-                                    ><i class="fas fa-list"></i> Watch List</a
-                                >
+                                <a class="nav-link" id="watchlist-tab" data-bs-toggle="pill" href="#watchlist" role="tab"><i
+                                        class="fas fa-heart"></i> Watch List</a>
                             </li>
                             <li class="nav-item mb-1">
-                                <a
-                                    class="nav-link"
-                                    id="orders-tab"
-                                    data-bs-toggle="pill"
-                                    href="#orders"
-                                    role="tab"
-                                    ><i class="fas fa-shopping-bag"></i> Orders</a
-                                >
+                                <a class="nav-link" id="orders-tab" data-bs-toggle="pill" href="#orders" role="tab"><i
+                                        class="fas fa-shopping-bag"></i> Orders</a>
                             </li>
                             <li class="nav-item mb-1">
-                                <a
-                                    class="nav-link"
-                                    id="address-tab"
-                                    data-bs-toggle="pill"
-                                    href="#address"
-                                    role="tab"
-                                    ><i class="fas fa-map-marker-alt"></i> Address</a
-                                >
+                                <a class="nav-link" id="address-tab" data-bs-toggle="pill" href="#address" role="tab"><i
+                                        class="fas fa-map-marker-alt"></i> Address</a>
                             </li>
                             <li class="nav-item mt-3">
-                                <button
-                                    class="logout-btn w-100 vs-btn w-100 style4"
-                                    onclick="logout()"
-                                    >
+                                <button class="logout-btn w-100 vs-btn w-100 style4" onclick="signOut()">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </button>
                             </li>
@@ -253,55 +213,63 @@
                 <div class="col-lg-9">
                     <div class="profile-content tab-content" id="profileTabContent">
                         <!-- Account Details -->
-                        <div
-                            class="tab-pane fade show active"
-                            id="account"
-                            role="tabpanel"
-                            >
+                        <div class="tab-pane fade show active" id="account" role="tabpanel">
                             <h4 class="mb-4">Account Details</h4>
                             <form>
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label">First Name</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            value=""
-                                            placeholder="First Name"
-                                            />
+                                        <input type="text" class="form-control" value="" id="firstName"
+                                               placeholder="First Name" />
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Last Name</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            value=""
-                                            placeholder="Last Name"
-                                            />
+                                        <input type="text" class="form-control" value="" id="lastName"
+                                               placeholder="Last Name" />
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Email</label>
-                                        <input
-                                            type="email"
-                                            class="form-control"
-                                            value=""
-                                            placeholder="Email"
-                                            />
+                                        <input type="email" class="form-control" value="" id="email" placeholder="Email" />
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Phone</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            value=""
-                                            placeholder="Phone"
-                                            />
+                                        <input type="text" class="form-control" value="" id="phone" placeholder="Phone" />
                                     </div>
                                     <div class="col-12">
-                                        <button class="vs-btn w-100 style4 px-4" type="submit">
-                                            Save Changes
-                                        </button>
+                                        <label class="form-label">Address</label>
+                                        <div class="row g-2">
+                                            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                                <input type="text" class="form-control" id="lineOne"
+                                                       placeholder="Address Line 1" />
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <input type="text" class="form-control" id="lineTwo"
+                                                       placeholder="Address Line 2 " />
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="row g-2">
+                                            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                                <label class="form-label">Postal Code</label>
+                                                <input type="text" class="form-control" id="postalCode"
+                                                       placeholder="Postal Code" />
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label class="form-label">City</label>
+                                                <select class="form-select" id="citySelect">
+                                                    <option value="0">Select</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--                                <div class="col-12 mt-5">
+                                                                            <button class="vs-btn w-100 style4 px-4" type="submit">
+                                                                                Save Changes
+                                                                            </button>
+                                                                        </div>-->
                                 </div>
                             </form>
                             <hr class="my-4" />
@@ -310,33 +278,27 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label">Current Password</label>
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Current Password"
-                                            />
+                                        <input type="password" class="form-control" id="currentPassword"
+                                               placeholder="Current Password" />
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">New Password</label>
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="New Password"
-                                            />
+                                        <input type="password" class="form-control" id="newPassword"
+                                               placeholder="New Password" />
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label">Confirm New Password</label>
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            placeholder="Confirm New Password"
-                                            />
+                                        <input type="password" class="form-control" id="confirmPassword"
+                                               placeholder="Confirm New Password" />
                                     </div>
                                     <div class="col-5">
-                                        <button class="vs-btn w-100 style4" type="submit">
+                                        <button class="vs-btn w-100 style4" type="submit" onclick="saveChanges();">
                                             Change Password
                                         </button>
                                     </div>
+
+                                    <p class="text-danger text-center mt-lg-3 mb-lg-34" id="message"></p> <!-- Diniiiiiii-->
+
                                 </div>
                             </form>
                         </div>
@@ -357,42 +319,52 @@
                             <h4 class="mb-4">Order History</h4>
                             <div class="alert alert-info">No orders yet.</div>
                         </div>
+
+
+
                         <!-- Address -->
                         <div class="tab-pane fade" id="address" role="tabpanel">
                             <h4 class="mb-4">Address Book</h4>
-                            <form>
+                            <div id="addressDetails" class="mb-3">
+                                <p><strong>Address Line 1:</strong> <span id="addrLine1">123 Main St</span></p>
+                                <p><strong>Address Line 2:</strong> <span id="addrLine2">Apt 4B</span></p>
+                                <p><strong>Postal Code:</strong> <span id="addrPostal">10001</span></p>
+                                <p><strong>City:</strong> <span id="addrCity">Colombo</span></p>
+                                <button class="btn btn-outline-primary btn-sm mt-2" type="button"
+                                        onclick="editAddress()">Edit</button>
+                            </div>
+                            <form id="addressEditForm" style="display:none;">
                                 <div class="row g-3">
-                                    <div class="col-12">
-                                        <label class="form-label">Address</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Street, City, State, Zip"
-                                            />
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Address Line 1</label>
+                                        <input type="text" class="form-control" id="editAddrLine1"
+                                               placeholder="Address Line 1" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Country</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Country"
-                                            />
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Address Line 2</label>
+                                        <input type="text" class="form-control" id="editAddrLine2"
+                                               placeholder="Address Line 2 (optional)" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Phone</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Phone"
-                                            />
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Postal Code</label>
+                                        <input type="text" class="form-control" id="editAddrPostal"
+                                               placeholder="Postal Code" />
                                     </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary px-4" type="submit">
-                                            Save Address
-                                        </button>
+                                    <!--                                <div class="col-12 col-md-6">
+                                                                            <label class="form-label">City</label>
+                                                                            <select class="form-select" id="city">
+                                                                                <option value="0">Select City</option>
+                                                                             
+                                                                            </select>
+                                                                        </div>-->
+                                    <div class="col-12 mt-2">
+                                        <button class="btn btn-primary px-4 me-2" type="submit">Save</button>
+                                        <button class="btn btn-secondary px-4" type="button"
+                                                onclick="cancelEditAddress()">Cancel</button>
                                     </div>
                                 </div>
                             </form>
+                            <ul id="addressUL"></ul>
                         </div>
                     </div>
                 </div>
@@ -407,11 +379,11 @@
         </footer>
 
         <!--********************************
-          Code Ends Here 
-        ******************************** -->
+                      Code Ends Here 
+                    ******************************** -->
         <!--==============================
-              All Js File
-            ============================== -->
+                          All Js File
+                        ============================== -->
 
         <!-- Jquery (should be first) -->
 
@@ -436,40 +408,68 @@
 
         <!-- Your custom loader -->
         <script src="assets/js/topBottom.js"></script>
+
+        <script src="assets/js/sign-out.js"></script>
+        <script src="assets/js/my-account.js"></script>
+        <script src="assets/js/sign-out.js"></script>
         <script>
-                                        // Wait for header/footer and all plugins to be loaded
-                                        $(document).on('headerFooterLoaded', function () {
-                                            // Animate tab switching
-                                            $("#profileTabs a").on("show.bs.tab", function (e) {
-                                                $(".profile-content .tab-pane").removeClass("show active");
-                                                var target = $(e.target).attr("href");
-                                                setTimeout(function () {
-                                                    $(target).addClass("show active");
-                                                }, 100);
-                                            });
-                                            // Profile picture preview
-                                            $("#profilePicInput").on("change", function (e) {
-                                                const [file] = e.target.files;
-                                                if (file) {
-                                                    const reader = new FileReader();
-                                                    reader.onload = function (ev) {
-                                                        $("#profileImage").attr("src", ev.target.result);
-                                                    };
-                                                    reader.readAsDataURL(file);
+                                                // Wait for header/footer and all plugins to be loaded
+                                                $(document).on('headerFooterLoaded', function () {
+                                                    // Animate tab switching
+                                                    $("#profileTabs a").on("click", function (e) {
+                                                        e.preventDefault();
+                                                        $("#profileTabs a").removeClass("active");
+                                                        $(this).addClass("active");
+                                                        $(".profile-content .tab-pane").removeClass("show active");
+                                                        var target = $(this).attr("href");
+                                                        setTimeout(function () {
+                                                            $(target).addClass("show active");
+                                                        }, 100);
+                                                    });
+                                                    // Profile picture preview
+                                                    $("#profilePicInput").on("change", function (e) {
+                                                        const [file] = e.target.files;
+                                                        if (file) {
+                                                            const reader = new FileReader();
+                                                            reader.onload = function (ev) {
+                                                                $("#profileImage").attr("src", ev.target.result);
+                                                            };
+                                                            reader.readAsDataURL(file);
+                                                        }
+                                                    });
+                                                });
+
+                                                // Address Book Edit/Save/Cancel
+                                                function editAddress() {
+                                                    // Fill form with current values
+                                                    document.getElementById('editAddrLine1').value = document.getElementById('addrLine1').textContent;
+                                                    document.getElementById('editAddrLine2').value = document.getElementById('addrLine2').textContent;
+                                                    document.getElementById('editAddrPostal').value = document.getElementById('addrPostal').textContent;
+                                                    document.getElementById('editAddrCity').value = document.getElementById('addrCity').textContent;
+                                                    document.getElementById('addressDetails').style.display = 'none';
+                                                    document.getElementById('addressEditForm').style.display = '';
                                                 }
-                                            });
-                                        });
-                                        function logout() {
-                                            if (confirm("Are you sure you want to logout?")) {
-                                                window.location.href = "signin.html";
-                                            }
-                                        }
-                                        // Header and Footer include using topBottom.js
-                                        document.addEventListener('DOMContentLoaded', function () {
-                                            if (typeof loadHeaderFooter === 'function') {
-                                                loadHeaderFooter();
-                                            }
-                                        });
+                                                function cancelEditAddress() {
+                                                    document.getElementById('addressEditForm').style.display = 'none';
+                                                    document.getElementById('addressDetails').style.display = '';
+                                                }
+                                                document.getElementById('addressEditForm').addEventListener('submit', function (e) {
+                                                    e.preventDefault();
+                                                    document.getElementById('addrLine1').textContent = document.getElementById('editAddrLine1').value;
+                                                    document.getElementById('addrLine2').textContent = document.getElementById('editAddrLine2').value;
+                                                    document.getElementById('addrPostal').textContent = document.getElementById('editAddrPostal').value;
+                                                    document.getElementById('addrCity').textContent = document.getElementById('editAddrCity').value;
+                                                    document.getElementById('addressEditForm').style.display = 'none';
+                                                    document.getElementById('addressDetails').style.display = '';
+                                                });
+                                                // Header and Footer include using topBottom.js
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    if (typeof loadHeaderFooter === 'function') {
+                                                        loadHeaderFooter();
+                                                    }
+                                                });
         </script>
     </body>
+    <ul id="addressUL"></ul>
+
 </html>
