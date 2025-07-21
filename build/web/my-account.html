@@ -167,9 +167,7 @@
 
     </head>
 
-    <!--<body onload="loadDatas();">-->
-    <body onload="getUserData();" >
-
+    <body onload="loadData();">
         <div id="header-placeholder"></div>
         <!-- Header will be loaded here by topBottom.js -->
         <div class="container py-5">
@@ -327,14 +325,6 @@
                         <!-- Address -->
                         <div class="tab-pane fade" id="address" role="tabpanel">
                             <h4 class="mb-4">Address Book</h4>
-                            <div id="addressDetails" class="mb-3">
-                                <p><strong>Address Line 1:</strong> <span id="addrLine1">123 Main St</span></p>
-                                <p><strong>Address Line 2:</strong> <span id="addrLine2">Apt 4B</span></p>
-                                <p><strong>Postal Code:</strong> <span id="addrPostal">10001</span></p>
-                                <p><strong>City:</strong> <span id="addrCity">Colombo</span></p>
-                                <button class="btn btn-outline-primary btn-sm mt-2" type="button"
-                                        onclick="editAddress()">Edit</button>
-                            </div>
                             <form id="addressEditForm" style="display:none;">
                                 <div class="row g-3">
                                     <div class="col-12 col-md-6">
@@ -352,13 +342,7 @@
                                         <input type="text" class="form-control" id="editAddrPostal"
                                                placeholder="Postal Code" />
                                     </div>
-                                    <!--                                <div class="col-12 col-md-6">
-                                                                            <label class="form-label">City</label>
-                                                                            <select class="form-select" id="city">
-                                                                                <option value="0">Select City</option>
-                                                                             
-                                                                            </select>
-                                                                        </div>-->
+                                 
                                     <div class="col-12 mt-2">
                                         <button class="btn btn-primary px-4 me-2" type="submit">Save</button>
                                         <button class="btn btn-secondary px-4" type="button"
@@ -366,6 +350,14 @@
                                     </div>
                                 </div>
                             </form>
+                            <div id="addressDetails" class="mb-3">
+                                <p><strong>Address Line 1:</strong> <span id="addrLine1">123 Main St</span></p>
+                                <p><strong>Address Line 2:</strong> <span id="addrLine2">Apt 4B</span></p>
+                                <p><strong>Postal Code:</strong> <span id="addrPostal">10001</span></p>
+                                <p><strong>City:</strong> <span id="addrCity">Colombo</span></p>
+                                <button class="btn btn-outline-primary btn-sm mt-2" type="button"
+                                        onclick="editAddress()">Edit</button>
+                            </div>
                             <ul id="addressUL"></ul>
                         </div>
                     </div>
@@ -379,9 +371,6 @@
         <footer id="footer-placeholder">
 
         </footer>
-
-
-        <script src="assets/js/t-my-account.js"></script>
 
         <!--********************************
                       Code Ends Here 
@@ -414,66 +403,66 @@
         <!-- Your custom loader -->
         <script src="assets/js/topBottom.js"></script>
 
-        <script src="assets/js/t-sign-out.js"></script>
-        <script src="assets/js/t-sign-in.js"></script>
+        <script src="assets/js/sign-out.js"></script>
+        <script src="assets/js/my-account.js"></script>
+        <script src="assets/js/sign-out.js"></script>
         <script>
-                                                    // Wait for header/footer and all plugins to be loaded
-                                                    $(document).on('headerFooterLoaded', function () {
-                                                        // Animate tab switching
-                                                        $("#profileTabs a").on("click", function (e) {
-                                                            e.preventDefault();
-                                                            $("#profileTabs a").removeClass("active");
-                                                            $(this).addClass("active");
-                                                            $(".profile-content .tab-pane").removeClass("show active");
-                                                            var target = $(this).attr("href");
-                                                            setTimeout(function () {
-                                                                $(target).addClass("show active");
-                                                            }, 100);
-                                                        });
-                                                        // Profile picture preview
-                                                        $("#profilePicInput").on("change", function (e) {
-                                                            const [file] = e.target.files;
-                                                            if (file) {
-                                                                const reader = new FileReader();
-                                                                reader.onload = function (ev) {
-                                                                    $("#profileImage").attr("src", ev.target.result);
-                                                                };
-                                                                reader.readAsDataURL(file);
-                                                            }
-                                                        });
-                                                    });
+        // Tab switching logic should run on DOMContentLoaded so tabs work immediately
+        document.addEventListener('DOMContentLoaded', function () {
+            $("#profileTabs a").on("click", function (e) {
+                e.preventDefault();
+                $("#profileTabs a").removeClass("active");
+                $(this).addClass("active");
+                $(".profile-content .tab-pane").removeClass("show active");
+                var target = $(this).attr("href");
+                setTimeout(function () {
+                    $(target).addClass("show active");
+                }, 100);
+            });
+            // Profile picture preview (if you have this input)
+            $("#profilePicInput").on("change", function (e) {
+                const [file] = e.target.files;
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (ev) {
+                        $("#profileImage").attr("src", ev.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
 
-                                                    // Address Book Edit/Save/Cancel
-                                                    function editAddress() {
-                                                        // Fill form with current values
-                                                        document.getElementById('editAddrLine1').value = document.getElementById('addrLine1').textContent;
-                                                        document.getElementById('editAddrLine2').value = document.getElementById('addrLine2').textContent;
-                                                        document.getElementById('editAddrPostal').value = document.getElementById('addrPostal').textContent;
-                                                        document.getElementById('editAddrCity').value = document.getElementById('addrCity').textContent;
-                                                        document.getElementById('addressDetails').style.display = 'none';
-                                                        document.getElementById('addressEditForm').style.display = '';
+                                                // Address Book Edit/Save/Cancel
+                                                function editAddress() {
+                                                    // Fill form with current values
+                                                    document.getElementById('editAddrLine1').value = document.getElementById('addrLine1').textContent;
+                                                    document.getElementById('editAddrLine2').value = document.getElementById('addrLine2').textContent;
+                                                    document.getElementById('editAddrPostal').value = document.getElementById('addrPostal').textContent;
+                                                    document.getElementById('editAddrCity').value = document.getElementById('addrCity').textContent;
+                                                    document.getElementById('addressDetails').style.display = 'none';
+                                                    document.getElementById('addressEditForm').style.display = '';
+                                                }
+                                                function cancelEditAddress() {
+                                                    document.getElementById('addressEditForm').style.display = 'none';
+                                                    document.getElementById('addressDetails').style.display = '';
+                                                }
+                                                document.getElementById('addressEditForm').addEventListener('submit', function (e) {
+                                                    e.preventDefault();
+                                                    document.getElementById('addrLine1').textContent = document.getElementById('editAddrLine1').value;
+                                                    document.getElementById('addrLine2').textContent = document.getElementById('editAddrLine2').value;
+                                                    document.getElementById('addrPostal').textContent = document.getElementById('editAddrPostal').value;
+                                                    document.getElementById('addrCity').textContent = document.getElementById('editAddrCity').value;
+                                                    document.getElementById('addressEditForm').style.display = 'none';
+                                                    document.getElementById('addressDetails').style.display = '';
+                                                });
+                                                // Header and Footer include using topBottom.js
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    if (typeof loadHeaderFooter === 'function') {
+                                                        loadHeaderFooter();
                                                     }
-                                                    function cancelEditAddress() {
-                                                        document.getElementById('addressEditForm').style.display = 'none';
-                                                        document.getElementById('addressDetails').style.display = '';
-                                                    }
-                                                    document.getElementById('addressEditForm').addEventListener('submit', function (e) {
-                                                        e.preventDefault();
-                                                        document.getElementById('addrLine1').textContent = document.getElementById('editAddrLine1').value;
-                                                        document.getElementById('addrLine2').textContent = document.getElementById('editAddrLine2').value;
-                                                        document.getElementById('addrPostal').textContent = document.getElementById('editAddrPostal').value;
-                                                        document.getElementById('addrCity').textContent = document.getElementById('editAddrCity').value;
-                                                        document.getElementById('addressEditForm').style.display = 'none';
-                                                        document.getElementById('addressDetails').style.display = '';
-                                                    });
-                                                    // Header and Footer include using topBottom.js
-                                                    document.addEventListener('DOMContentLoaded', function () {
-                                                        if (typeof loadHeaderFooter === 'function') {
-                                                            loadHeaderFooter();
-                                                        }
-                                                    });
+                                                });
         </script>
     </body>
-    <!--<ul id="addressUL"></ul>-->
+    <ul id="addressUL"></ul>
 
 </html>

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -28,24 +29,17 @@ public class AddressData extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession(false);
-        if (ses != null && ses.getAttribute("address") != null) {
-            Address add = (Address) ses.getAttribute("address");
-            JsonObject responseObject = new JsonObject();
-            responseObject.addProperty("lineOne", add.getLineOne());
-            responseObject.addProperty("lineTwo", add.getLineTwo());
-            responseObject.addProperty("postalCode", add.getPostalCode());
-
+        if (ses != null && ses.getAttribute("user") != null) {
+            User user = (User) ses.getAttribute("user");
             Session s = HibernateUtil.getSessionFactory().openSession();
-
             Criteria c = s.createCriteria(Address.class);
+            c.add(Restrictions.eq("user", user));
             List<Address> addList = c.list();
-
             Gson gson = new Gson();
             String toJson = gson.toJson(addList);
             response.setContentType("application/json");
             response.getWriter().write(toJson);
             s.close();
-
         }
     }
 }

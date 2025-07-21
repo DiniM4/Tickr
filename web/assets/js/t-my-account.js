@@ -1,196 +1,93 @@
-//
-//function loadDatas() {
-//    getUserData();
-//    getCityData();
-//    getAddressData();
-//
-//}
-
-function loadDatass() {
-    getUserData();
-    getCityData();
-
-}
-
-async function getUserData() {
-    const response = await fetch("MyAccount");
-
-    if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-        document.getElementById("username").innerHTML = Hello ${json.firstName} ${json.lastName};
-        document.getElementById("since").innerHTML = Tickr Member Since ${json.since};
-        document.getElementById("firstName").value = json.firstName;
-        document.getElementById("lastName").value = json.lastName;
-        document.getElementById("currentPassword").value = json.password;
-        document.getElementById("phone").value = json.phone;
-        document.getElementById("email").value = json.email;
-
-
-
-
-        if (json.hasOwnProperty("addressList") && json.addressList !== undefined) {
-
-            let email;
-            let lineOne;
-            let lineTwo;
-            let city;
-            let postalCode;
-            let cityId;
-
-            const addressUL = document.getElementById("addressUL");
-
-            json.addressList.forEach(address => {
-                email = address.user.email;
-
-                lineOne = address.lineOne;
-                lineTwo = address.lineTwo;
-                city = address.city.name;
-                postalCode = address.postalCode;
-
-                cityId = address.city.id;
-
-                const line = document.createElement("Li");
-                line.innerHTML = lineOne + ",<br/>" +
-                        lineTwo + ",<br/>" +
-                        city + "<br/>" +
-                        postalCode;
-
-                addressUL.appendChild(line);
-
-
-
-            });
-
-            console.log("lineOne:", lineOne);
-            console.log("lineTwo:", lineTwo);
-            console.log("postalCode:", postalCode);
-            console.log("cityId:", cityId);
-
-
-
-            document.getElementById("addName").innerHTML = ${json.firstName} ${json.lastName};
-            document.getElementById("addEmail").innerHTML = Email: ${email};
-            document.getElementById("contact").innerHTML = Phone: 078956666;
-            document.getElementById("phone").innerHTML = Phone: ${mobile};
-
-            document.getElementById("lineOne").value = lineOne;
-            document.getElementById("lineTwo").value = lineTwo;
-            document.getElementById("postalCode").value = postalCode;
-            document.getElementById("citySelect").value = Number(cityId);
-
-        }
-
-
-
-
-    } else {
-
-    }
-}
-
-async function getCityData() {
-    const response = await fetch("CityData");
-    console.log("CityData response status:", response.status);
-    if (response.ok) {
-        const json = await response.json();
-        console.log("CityData JSON:", json);
-        const citySelect = document.getElementById("citySelect");
-        if (!citySelect) {
-            console.error("citySelect element not found!");
-            return;
-        }
-        if (!Array.isArray(json)) {
-            console.error("CityData response is not an array!");
-            return;
-        }
-        json.forEach(city => {
-            let option = document.createElement("option");
-            option.innerHTML = city.name;
-            option.value = city.id;
-            citySelect.appendChild(option);
-        });
-    } else {
-        console.error("Failed to fetch CityData");
-    }
-}
-
-async function  getAddressData() {
-
-    const response = await fetch("AddressData");
-
-    if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-
-        document.getElementById("lineOne").value = json.lineOne;
-        document.getElementById("lineTwo").value = json.lineTwo;
-        document.getElementById("postalCode").value = json.postalCode;
-
-
-    }else{
-             console.error("Failed to fetch address");
-   
-    }
-}
-
-
-
-async function saveChanges() {
-
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const lineOne = document.getElementById("lineOne").value;
-    const lineTwo = document.getElementById("lineTwo").value;
-    const postalCode = document.getElementById("postalCode").value;
-    const  cityId = document.getElementById("citySelect").value;
-    const currentPassword = document.getElementById("currentPassword").value;
-    const newPassword = document.getElementById("newPassword").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    const userDataObject = {
-        firstName: firstName,
-        lastName: lastName,
-        lineOne: lineOne,
-        lineTwo: lineTwo,
-        postalCode: postalCode,
-        cityId: cityId,
-        currentPassword: currentPassword,
-        newPassword: newPassword,
-        confirmPassword: confirmPassword
-    };
-
-    const userDataJson = JSON.stringify(userDataObject);
-
-
-    const response = await fetch(
-            "MyAccount", {
-                method: "PUT",
-                body: userDataJson,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-
+function getCityData() {
+    fetch("CityData")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("CityData not available");
             }
-    );
+            return response.json();
+        })
+        .then((data) => {
+            const citySelect = document.getElementById("citySelect");
+            const editCitySelect = document.getElementById("editAddrCity");
 
-    if (response.ok) {
+            if (!citySelect || !editCitySelect) {
+                console.warn("City select elements not found");
+                return;
+            }
 
-        const json = await response.json();
-        if (json.status) {
+            citySelect.innerHTML = `<option value="0">Select City</option>`;
+            editCitySelect.innerHTML = `<option value="0">Select City</option>`;
 
-            getUserData();
+            data.forEach((city) => {
+                const option1 = document.createElement("option");
+                option1.value = city.id;
+                option1.textContent = city.name;
+                citySelect.appendChild(option1);
 
-        } else {
-
-            document.getElementById("message").innerHTML = json.message;
-
-        }
-
-    } else {
-        document.getElementById("message").innerHTML = "Profile Details update failed";
-    }
-
-
-
+                const option2 = document.createElement("option");
+                option2.value = city.id;
+                option2.textContent = city.name;
+                editCitySelect.appendChild(option2);
+            });
+        })
+        .catch((error) => {
+            console.error("Error loading cities:", error);
+        });
 }
+
+function loadUserData() {
+    fetch("MyAccount")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("MyAccount fetch failed");
+            }
+            return response.json();
+        })
+        .then((json) => {
+            // Safely get elements
+            const setText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = text;
+            };
+            const setValue = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.value = val;
+            };
+
+            setText("username", `Hello ${json.firstName} ${json.lastName}`);
+            setText("since", `Tickr Member Since ${json.since}`);
+            setText("addName", `${json.firstName} ${json.lastName}`);
+            setText("addEmail", `Email: ${json.email}`);
+            setText("contact", `Phone: ${json.phone}`);
+            setText("phone", `Phone: ${json.phone}`);
+
+            setValue("firstName", json.firstName);
+            setValue("lastName", json.lastName);
+            setValue("email", json.email);
+            setValue("currentPassword", "");
+
+            const addressList = json.addressList;
+            if (Array.isArray(addressList) && addressList.length > 0) {
+                const address = addressList[0];
+
+                setText("addrLineOne", `${address.lineOne},`);
+                setText("addrLineTwo", address.lineTwo);
+                setText("addrCity", address.city.name);
+                setText("addrPostal", address.postalCode);
+
+                setValue("editAddrLine1", address.lineOne);
+                setValue("editAddrLine2", address.lineTwo);
+                setValue("editAddrPostal", address.postalCode);
+                setValue("editAddrCity", address.city.id);
+            }
+        })
+        .catch((error) => {
+            console.error("Error loading user data:", error);
+        });
+}
+
+// Call functions on DOM load
+document.addEventListener("DOMContentLoaded", () => {
+    getCityData();
+    loadUserData();
+});
