@@ -21,6 +21,10 @@ public class Util {
         return mobile.matches("^07[01245678]{1}[0-9]{7}$");
     }
 
+    public static boolean isInteger(String value) {
+        return value.matches("^?\\d+$");
+    }
+
     public static boolean isCodeValid(String code) {
 
         return code.matches("^\\d{4,5}$");

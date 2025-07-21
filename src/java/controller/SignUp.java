@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import hibernate.HibernateUtil;
 import hibernate.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import model.Util;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -117,7 +115,7 @@ public class SignUp extends HttpServlet {
                 //Create a Session
 
                 responseObject.addProperty("status", true);
-                responseObject.addProperty("message", "Registration Sussess.Please check your email for the verification code");
+                responseObject.addProperty("message", "Registration Sucssess.Please check your email for the verification code");
 
             }
 
