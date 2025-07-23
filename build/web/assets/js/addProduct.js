@@ -15,12 +15,9 @@ async function loadProductsData() {
             //load brands
             loadSelect("brand", json.brandList, "name");
 
-
             //load models
             modelList = json.modelList;
             // loadSelect("model",json.modelList,"name");
-
-
 
             //load color
             loadSelect("color", json.colorList, "value");
@@ -37,8 +34,6 @@ async function loadProductsData() {
         document.getElementById("message").innerHTML = "Unable to get product data ! Please try again later";
 
     }
-
-
 
 }
 
@@ -75,6 +70,7 @@ function loadModels() {
 
 
 async function saveProductData() {
+
     const  brandId = document.getElementById("brand").value;
     const  modelId = document.getElementById("model").value;
     const  title = document.getElementById("title").value;
@@ -102,29 +98,53 @@ async function saveProductData() {
     form.append("image2", image2);
     form.append("image3", image3);
 
-    const reponse = await fetch("AddProduct", {
-        method: "POST",
-        body: form
-    });
+    const response = await fetch("AddProduct",
+            {
+                method: "POST",
+                body: form
+            }
+    );
+
+    const popup = Notification();
 
     if (response.ok) {
         const json = await response.json();
-
         if (json.status) { //true- success
+
+            popup.success(
+                    {
+                        message: "New Product Added successfully"
+                    }
+            );
+
+            document.getElementById("brand").value = 0;
+            document.getElementById("model").value = 0;
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("color").value = 0;
+            document.getElementById("category").value = 0;
+            document.getElementById("price").value = "0.00";
+            document.getElementById("qty").value = 1;
+            document.getElementById("img1").value = "";
+            document.getElementById("img2").value = "";
+            document.getElementById("img3").value = "";
 
         } else { //when status false
             if (json.message === "Please Sign In!") {
                 window.location = "login.html";
             } else {
-
-                document.getElementById("message").innerHTML = "Unable to Add product data ! Please try again later";
+                popup.error(
+                        {
+                            message: json.message
+                        }
+                );
 
             }
         }
     } else {
-        document.getElementById("message").innerHTML = "Unable to Add product data ! Please try again later";
-
-
+        popup.error({
+            message: "Server Error! Please try again later."
+        });
     }
 
 

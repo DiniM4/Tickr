@@ -12,6 +12,17 @@ import javax.persistence.Table;
 @Table(name = "status")
 public class Status implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "value", length = 20, nullable = false)
+    private String value;
+
+    public Status() {
+    }
+
     /**
      * @return the id
      */
@@ -39,16 +50,5 @@ public class Status implements Serializable {
     public void setValue(String value) {
         this.value = value;
     }
-
-    public Status() {
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "value", length = 20, nullable = false)
-    private String value;
 
 }

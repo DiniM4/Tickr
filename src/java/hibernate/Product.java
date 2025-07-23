@@ -56,6 +56,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
+
     @Column(name = "created_at")
     private Date created_at;
 
@@ -90,8 +94,6 @@ public class Product implements Serializable {
     /**
      * @return the mode
      */
- 
-
     /**
      * @return the description
      */
@@ -202,6 +204,20 @@ public class Product implements Serializable {
      */
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    /**
+     * @return the status
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
 }

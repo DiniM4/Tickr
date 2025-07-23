@@ -31,4 +31,8 @@ public class Util {
 
     }
 
+    public static boolean isDouble(String text) {
+        return text.matches("^\\d+(\\.\\d{2})?$");
+    }
+
 }

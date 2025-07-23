@@ -23,6 +23,8 @@
         <mapping class="hibernate.Status"/>
         <mapping class="hibernate.Storage"/>
         <mapping class="hibernate.Category"/>
+        <mapping class="hibernate.Product" />
+
 
     </session-factory>
 </hibernate-configuration>
