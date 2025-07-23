@@ -22,6 +22,8 @@
         <mapping class="hibernate.Quality"/>
         <mapping class="hibernate.Status"/>
         <mapping class="hibernate.Storage"/>
+        <mapping class="hibernate.Category"/>
+
     </session-factory>
 </hibernate-configuration>
 
