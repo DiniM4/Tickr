@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/Tickr/web/index.html</file>
-            <file>file:/C:/xampp/htdocs/Tickr/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/xampp/htdocs/Tickr/src/java/hibernate/User.java</file>
-            <file>file:/C:/xampp/htdocs/Tickr/src/java/controller/MyAccount.java</file>
-            <file>file:/C:/xampp/htdocs/Tickr/web/my-account.html</file>
-            <file>file:/C:/xampp/htdocs/Tickr/src/java/hibernate/Address.java</file>
-            <file>file:/C:/xampp/htdocs/Tickr/web/assets/js/my-account.js</file>
-            <file>file:/C:/xampp/htdocs/Tickr/web/login.html</file>
-            <file>file:/C:/xampp/htdocs/Tickr/web/assets/js/t-my-account.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
