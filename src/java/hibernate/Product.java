@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -35,7 +36,7 @@ public class Product implements Serializable {
     @JoinColumn(name = "model_id")
     private Model model;
 
-    @Column(name = "description", length = 20, nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "price", nullable = false)
