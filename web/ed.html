@@ -1,74 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bootstrap Carousel Test</title>
-
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    .carousel-control-prev-icon::after {
-      content: '\2039';
-      font-size: 3rem;
-      color: black;
-    }
-
-    .carousel-control-next-icon::after {
-      content: '\203A';
-      font-size: 3rem;
-      color: black;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-image: none !important;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container my-5">
-    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="assets/img/breadcumb/breadcumb-bg.jpg" class="d-block w-100" alt="Image 1">
+<div class="col-lg-3">
+  <div class="sidebar-area tours-sidebar">
+    <div class="widget">
+      <h3 class="widget_title">Find Your Watch</h3>
+      <p class="widget_text">
+        Search and filter through our premium collection of wristwatches.
+      </p>
+      <form class="booking-form">
+        <div class="form-group">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search Watch Name" />
         </div>
-        <div class="carousel-item">
-          <img src="assets/img/breadcumb/breadcumb-bg.jpg" class="d-block w-100" alt="Image 2">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/img/breadcumb/breadcumb-bg.jpg" class="d-block w-100" alt="Image 3">
-        </div>
-      </div>
 
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <div class="form-group">
+          <i class="fas fa-industry"></i>
+          <input type="text" placeholder="Brand (e.g. Omega, Rolex)" />
+        </div>
 
-      <!-- Indicators -->
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active"
-          aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"
-          aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"
-          aria-label="Slide 3"></button>
-      </div>
+        <div class="form-group">
+          <i class="fas fa-tag"></i>
+          <select class="form-select" name="category">
+            <option selected disabled hidden>Select Category</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="unisex">Unisex</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <i class="fas fa-palette"></i>
+          <input type="text" placeholder="Color (e.g. Black, Silver)" />
+        </div>
+
+        <div class="form-group">
+          <i class="fas fa-box"></i>
+          <select class="form-select" name="stock">
+            <option selected disabled hidden>Stock Availability</option>
+            <option value="in">In Stock</option>
+            <option value="out">Out of Stock</option>
+          </select>
+        </div>
+
+        <div class="price_slider_wrapper">
+          <h3 class="widget_title">Filter by Price</h3>
+
+          <div class="price-slider-bar">
+            <div class="range-input">
+              <input
+                type="range"
+                class="range-min"
+                min="100"
+                max="10000"
+                value="100"
+                step="100"
+              />
+              <input
+                type="range"
+                class="range-max"
+                min="100"
+                max="10000"
+                value="10000"
+                step="100"
+              />
+            </div>
+            <div class="price_label">
+              Price: $<span id="min-price">100</span> — $<span id="max-price"
+                >10000</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="chekbox-area">
+            <input
+              type="radio"
+              id="sort-popular"
+              name="sort"
+              value="popular"
+              checked
+            />
+            <label for="sort-popular">Popular</label>
+          </div>
+          <div class="chekbox-area">
+            <input type="radio" id="sort-trendy" name="sort" value="trendy" />
+            <label for="sort-trendy">Trendy</label>
+          </div>
+          <div class="chekbox-area">
+            <input type="radio" id="sort-latest" name="sort" value="latest" />
+            <label for="sort-latest">Latest</label>
+          </div>
+        </div>
+
+        <button class="vs-btn style4 w-100">Search Watches</button>
+      </form>
     </div>
   </div>
-
-  <!-- Bootstrap 5 Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+</div>
