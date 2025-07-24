@@ -37,7 +37,8 @@ public class MyAccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession ses = request.getSession(false);
+        HttpSession ses = request.getSession();
+        
         if (ses != null && ses.getAttribute("user") != null) {
             User user = (User) ses.getAttribute("user");
             JsonObject responseObject = new JsonObject();

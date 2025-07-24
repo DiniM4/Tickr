@@ -250,18 +250,18 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="row g-2">
-                                            <div class="col-12 col-md-6 mb-2 mb-md-0">
-                                                <label class="form-label">Postal Code</label>
-                                                <input type="text" class="form-control" id="postalCode"
-                                                       placeholder="Postal Code" />
-                                            </div>
+
                                             <div class="col-12 col-md-6">
                                                 <label class="form-label">City</label>
                                                 <select class="form-select" id="citySelect">
                                                     <option value="0">Select</option>
                                                 </select>
                                             </div>
-
+                                            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                                <label class="form-label">Postal Code</label>
+                                                <input id="postalCode" type="text" class="form-control" 
+                                                       placeholder="Postal Code" />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -342,7 +342,7 @@
                                         <input type="text" class="form-control" id="editAddrPostal"
                                                placeholder="Postal Code" />
                                     </div>
-                                 
+
                                     <div class="col-12 mt-2">
                                         <button class="btn btn-primary px-4 me-2" type="submit">Save</button>
                                         <button class="btn btn-secondary px-4" type="button"
@@ -406,61 +406,63 @@
         <script src="assets/js/sign-out.js"></script>
         <script src="assets/js/my-account.js"></script>
         <script src="assets/js/sign-out.js"></script>
-        <script>
-        // Tab switching logic should run on DOMContentLoaded so tabs work immediately
-        document.addEventListener('DOMContentLoaded', function () {
-            $("#profileTabs a").on("click", function (e) {
-                e.preventDefault();
-                $("#profileTabs a").removeClass("active");
-                $(this).addClass("active");
-                $(".profile-content .tab-pane").removeClass("show active");
-                var target = $(this).attr("href");
-                setTimeout(function () {
-                    $(target).addClass("show active");
-                }, 100);
-            });
-            // Profile picture preview (if you have this input)
-            $("#profilePicInput").on("change", function (e) {
-                const [file] = e.target.files;
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (ev) {
-                        $("#profileImage").attr("src", ev.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
+        <script src="assets/js/notification.js"></script>
 
-                                                // Address Book Edit/Save/Cancel
-                                                function editAddress() {
-                                                    // Fill form with current values
-                                                    document.getElementById('editAddrLine1').value = document.getElementById('addrLine1').textContent;
-                                                    document.getElementById('editAddrLine2').value = document.getElementById('addrLine2').textContent;
-                                                    document.getElementById('editAddrPostal').value = document.getElementById('addrPostal').textContent;
-                                                    document.getElementById('editAddrCity').value = document.getElementById('addrCity').textContent;
-                                                    document.getElementById('addressDetails').style.display = 'none';
-                                                    document.getElementById('addressEditForm').style.display = '';
-                                                }
-                                                function cancelEditAddress() {
-                                                    document.getElementById('addressEditForm').style.display = 'none';
-                                                    document.getElementById('addressDetails').style.display = '';
-                                                }
-                                                document.getElementById('addressEditForm').addEventListener('submit', function (e) {
+        <script>
+                                            // Tab switching logic should run on DOMContentLoaded so tabs work immediately
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                $("#profileTabs a").on("click", function (e) {
                                                     e.preventDefault();
-                                                    document.getElementById('addrLine1').textContent = document.getElementById('editAddrLine1').value;
-                                                    document.getElementById('addrLine2').textContent = document.getElementById('editAddrLine2').value;
-                                                    document.getElementById('addrPostal').textContent = document.getElementById('editAddrPostal').value;
-                                                    document.getElementById('addrCity').textContent = document.getElementById('editAddrCity').value;
-                                                    document.getElementById('addressEditForm').style.display = 'none';
-                                                    document.getElementById('addressDetails').style.display = '';
+                                                    $("#profileTabs a").removeClass("active");
+                                                    $(this).addClass("active");
+                                                    $(".profile-content .tab-pane").removeClass("show active");
+                                                    var target = $(this).attr("href");
+                                                    setTimeout(function () {
+                                                        $(target).addClass("show active");
+                                                    }, 100);
                                                 });
-                                                // Header and Footer include using topBottom.js
-                                                document.addEventListener('DOMContentLoaded', function () {
-                                                    if (typeof loadHeaderFooter === 'function') {
-                                                        loadHeaderFooter();
+                                                // Profile picture preview (if you have this input)
+                                                $("#profilePicInput").on("change", function (e) {
+                                                    const [file] = e.target.files;
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onload = function (ev) {
+                                                            $("#profileImage").attr("src", ev.target.result);
+                                                        };
+                                                        reader.readAsDataURL(file);
                                                     }
                                                 });
+                                            });
+
+                                            // Address Book Edit/Save/Cancel
+                                            function editAddress() {
+                                                // Fill form with current values
+                                                document.getElementById('editAddrLine1').value = document.getElementById('addrLine1').textContent;
+                                                document.getElementById('editAddrLine2').value = document.getElementById('addrLine2').textContent;
+                                                document.getElementById('editAddrPostal').value = document.getElementById('addrPostal').textContent;
+                                                document.getElementById('editAddrCity').value = document.getElementById('addrCity').textContent;
+                                                document.getElementById('addressDetails').style.display = 'none';
+                                                document.getElementById('addressEditForm').style.display = '';
+                                            }
+                                            function cancelEditAddress() {
+                                                document.getElementById('addressEditForm').style.display = 'none';
+                                                document.getElementById('addressDetails').style.display = '';
+                                            }
+                                            document.getElementById('addressEditForm').addEventListener('submit', function (e) {
+                                                e.preventDefault();
+                                                document.getElementById('addrLine1').textContent = document.getElementById('editAddrLine1').value;
+                                                document.getElementById('addrLine2').textContent = document.getElementById('editAddrLine2').value;
+                                                document.getElementById('addrPostal').textContent = document.getElementById('editAddrPostal').value;
+                                                document.getElementById('addrCity').textContent = document.getElementById('editAddrCity').value;
+                                                document.getElementById('addressEditForm').style.display = 'none';
+                                                document.getElementById('addressDetails').style.display = '';
+                                            });
+                                            // Header and Footer include using topBottom.js
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                if (typeof loadHeaderFooter === 'function') {
+                                                    loadHeaderFooter();
+                                                }
+                                            });
         </script>
     </body>
     <ul id="addressUL"></ul>

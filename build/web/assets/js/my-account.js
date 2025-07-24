@@ -2,11 +2,13 @@
 function loadData() {
     getUserData();
     getCityData();
-    getAddressData();
 
 }
 
 async function getUserData() {
+
+    const popup = new Notification();
+
     const response = await fetch("MyAccount");
 
     if (response.ok) {
@@ -78,6 +80,9 @@ async function getUserData() {
 
 
     } else {
+        popup.error({
+            message: "Somthing went wrong Please try agian leater"
+        });
 
     }
 }
@@ -108,24 +113,24 @@ async function getCityData() {
     }
 }
 
-async function  getAddressData() {
-
-    const response = await fetch("AddressData");
-
-    if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-
-        document.getElementById("lineOne").value = json.lineOne;
-        document.getElementById("lineTwo").value = json.lineTwo;
-        document.getElementById("postalCode").value = json.postalCode;
-
-
-    }else{
-             console.error("Failed to fetch address");
-   
-    }
-}
+//async function  getAddressData() {
+//
+//    const response = await fetch("AddressData");
+//
+//    if (response.ok) {
+//        const json = await response.json();
+//        console.log(json);
+//
+//        document.getElementById("lineOne").value = json.lineOne;
+//        document.getElementById("lineTwo").value = json.lineTwo;
+//        document.getElementById("postalCode").value = json.postalCode;
+//
+//
+//    } else {
+//        console.error("Failed to fetch address");
+//
+//    }
+//}
 
 
 
