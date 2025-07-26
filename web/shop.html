@@ -1,237 +1,357 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Tickr | Premium Watches | Shop</title>
-  <meta name="author" content="Tickr">
-  <meta name="description" content="Tickr - Premium Watches for Stylish People">
-  <meta name="keywords" content="Tickr, Watches, Smartwatches, Men's Watches, Women's Watches">
-  <meta name="robots" content="INDEX,FOLLOW">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" type="image/png" href="assets/img/favicons/favicon.png">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="theme-color" content="#ffffff">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Tickr | Premium Watches | Shop</title>
+        <meta name="author" content="Tickr">
+        <meta name="description" content="Tickr - Premium Watches for Stylish People">
+        <meta name="keywords" content="Tickr, Watches, Smartwatches, Men's Watches, Women's Watches">
+        <meta name="robots" content="INDEX,FOLLOW">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" type="image/png" href="assets/img/favicons/favicon.png">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
-  <link rel="stylesheet" href="assets/css/magnific-popup.min.css" />
-  <link rel="stylesheet" href="assets/css/slick.min.css" />
-  <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    .price-slider {
-      padding: 10px 0;
-    }
-    .price-labels {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 500;
-      margin-top: 10px;
-    }
-    .range-buttons button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .product-item {
-      border: 1px solid #eee;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      position: relative;
-    }
-    .product-img img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .product-actions {
-      background: rgba(255, 255, 255, 0.9);
-      opacity: 0;
-      transition: all 0.3s ease;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .product-item:hover .product-actions {
-      opacity: 1;
-    }
-    .sidebar-search .search-form {
-      position: relative;
-      margin-top: 20px;
-    }
-    .sidebar-search input.form-control {
-      padding-right: 40px;
-    }
-    .sidebar-search .search-btn {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: transparent;
-      color: #000;
-    }
-  </style>
-</head>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+        <link rel="stylesheet" href="assets/css/magnific-popup.min.css" />
+        <link rel="stylesheet" href="assets/css/slick.min.css" />
+        <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/slick.css" />
+        <link rel="stylesheet" href="assets/css/slick.min.css"/>
 
-<body>
-  <div id="header-placeholder"></div>
+        <style>
+            .price-slider {
+                padding: 10px 0;
+            }
 
-  <div class="breadcumb-wrapper" data-bg-src="assets/img/breadcumb/breadcumb-bg.jpg">
-    <div class="container z-index-common">
-      <div class="breadcumb-content">
-        <h1 class="breadcumb-title text-dark">Shop</h1>
-        <div class="breadcumb-menu-wrap">
-          <ul class="breadcumb-menu">
-            <li class="text-dark"><a href="index.html " class="text-dark">Home</a></li>
-            <li class="text-dark" >Shop</li>
-          </ul>
+            .price-labels {
+                display: flex;
+                justify-content: space-between;
+                font-weight: 500;
+                margin-top: 10px;
+            }
+
+            .range-buttons button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .product-item {
+                border: 1px solid #eee;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                background: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+                position: relative;
+            }
+
+            .product-img img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .product-actions {
+                background: rgba(255, 255, 255, 0.9);
+                opacity: 0;
+                transition: all 0.3s ease;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .product-item:hover .product-actions {
+                opacity: 1;
+            }
+
+            .sidebar-search .search-form {
+                position: relative;
+                margin-top: 20px;
+            }
+
+            .sidebar-search input.form-control {
+                padding-right: 40px;
+            }
+
+            .sidebar-search .search-btn {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                border: none;
+                background: transparent;
+                color: #000;
+            }
+
+            #brand-options li.chosen {
+                background-color: #007bff;  /* Blue background for selected */
+                color: white;               /* White text */
+                cursor: pointer;
+            }
+            #brand-options li {
+                cursor: pointer;
+            }
+            
+            #category-options li.chosen {
+                background-color: #007bff;  /* Blue background for selected */
+                color: white;               /* White text */
+                cursor: pointer;
+            }
+            #category-options li {
+                cursor: pointer;
+            }
+            #color-options li.chosen {
+                background-color: #007bff;  /* Blue background for selected */
+                color: white;               /* White text */
+                cursor: pointer;
+            }
+            #color-options li {
+                cursor: pointer;
+            }
+            
+         
+
+
+        </style>
+    </head>
+
+    <body onload="sloadData();">
+        <div id="header-placeholder"></div>
+
+        <div class="breadcumb-wrapper" data-bg-src="assets/img/breadcumb/breadcumb-bg.jpg">
+            <div class="container z-index-common">
+                <div class="breadcumb-content">
+                    <h1 class="breadcumb-title text-dark">Shop</h1>
+                    <div class="breadcumb-menu-wrap">
+                        <ul class="breadcumb-menu">
+                            <li class="text-dark"><a href="index.html " class="text-dark">Home</a></li>
+                            <li class="text-dark">Shop</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <section class="space-bottom">
-    <div class="outer-wrap wrap-style1">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 col-lg-9">
-            <div class="vs-sort-bar">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-md-auto col-sm-6 col-auto">
-                  <p class="woocommerce-result-count">Showing 1–9 of 20 results</p>
-                </div>
-                <div class="col-md-auto col-sm-auto col-auto">
-                  <form class="woocommerce-ordering" method="get">
-                    <select name="orderby" class="orderby" aria-label="Shop order">
-                      <option value="menu_order" selected="selected">Default Sorting</option>
-                      <option value="popularity">Sort by popularity</option>
-                      <option value="rating">Sort by rating</option>
-                      <option value="date">Sort by latest</option>
-                      <option value="price">Low to high</option>
-                      <option value="price-desc">High to low</option>
-                    </select>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="vs-product product-item">
-                  <div class="product-img">
-                    <a href="shop-details.html">
-                      <img src="assets/img/breadcumb/breadcumb-bg.jpg" alt="Watch Product">
-                    </a>
-                    <div class="product-actions">
-                      <a href="#" class="icon-btn" title="Wishlist"><i class="fas fa-heart"></i></a>
-                      <a href="cart.html" class="icon-btn" title="Add to Cart"><i class="fas fa-shopping-cart"></i></a>
+        <section class="space-bottom">
+            <div class="outer-wrap wrap-style1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="vs-sort-bar">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-md-auto col-sm-6 col-auto">
+                                        <span class="filter-results">Showing 1-10 of <span id="all-item-count"></span>
+                                            results</span>
+                                    </div>
+                                    <div class="col-md-auto col-sm-auto col-auto">
+                                        <form class="woocommerce-ordering" method="get">
+                                            <select id="st-sort" name="orderby" class="orderby" aria-label="Shop order">
+                                                <option>Sort by Latest</option>
+                                                <option>Sort by Oldest</option>
+                                                <option>Sort by Name</option>
+                                                <option>Sort by Price</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="st-product-container">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" id="st-product">
+                                    <div class="vs-product product-item">
+                                        <div class="product-img">
+                                            <a href="shop-details.html" id="st-product-a-1">
+                                                <img src="assets/img/breadcumb/breadcumb-bg.jpg" alt="Watch Product"
+                                                     id="st-product-img-1">
+                                            </a>
+                                            <div class="product-actions">
+                                                <a href="#" class="icon-btn" title="Wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="cart.html" class="icon-btn" title="Add to Cart"
+                                                   id="st-product-add-to-cart"><i class="fas fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                        <h5 class="product-title"><a href="#" id="st-product-title-1">Tickr Chrono Black</a>
+                                        </h5>
+                                        <span class="product-price" id="st-product-price-1">$199.00</span>
+                                        <a href="checkout.html" class="vs-btn style2 w-100 mt-2">Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center pt--20" id="st-pagination-container">
+                                <a href="#" class="axil-btn btn-bg-primary ml--10" id="st-pagination-button">Prev</a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="sidebar-area tours-sidebar">
+                                <div class="widget">
+                                    <h3 class="widget_title">Find Your Watch</h3>
+                                    <p class="widget_text">Search and filter through our premium collection of wristwatches.
+                                    </p>
+                                    <form class="booking-form">
+                                        <div class="form-group">
+                                            <i class="fas fa-search"></i>
+                                            <input id="name" type="text" placeholder="Search Watch Name" />
+                                        </div>
+
+                                        <!--                                        <div class="form-group">
+                                                                                        <i class="fas fa-industry"></i>
+                                                                                        <select id="brand" class="form-select" name="brand">
+                                                                                            <option value="0" selected disabled hidden >Select Brand</option>
+                                            
+                                                                                        </select>
+                                                                                    </div>
+                                            
+                                            
+                                                                                    <div class="form-group">
+                                                                                        <i class="fas fa-tag"></i>
+                                                                                        <select  id="category"  class="form-select" name="category">
+                                                                                            <option value="0" selected disabled hidden>Select Category</option>
+                                            
+                                                                                        </select>
+                                                                                    </div>
+                                            
+                                            
+                                                                                    <div class="form-group">
+                                                                                        <i class="fas fa-palette"></i>
+                                                                                        <select id="color" class="form-select" name="color">
+                                                                                            <option value="0" selected disabled hidden >Select Color</option>
+                                            
+                                                                                        </select>
+                                                                                    </div>
+                                            
+                                        -->
+                                        <!--                                        <div class="toggle-list product-categories active">
+                                                                                    <h6 class="title">BRAND</h6>
+                                                                                    <div class="shop-submenu">
+                                                                                        <ul id="brand-options">
+                                                                                            <li class="current-cat"><a href="#">Apple</a></li>
+                                                                                            <li id="brand-li"><a id="brand-a">Apple</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="toggle-list product-categories product-gender active">
+                                                                                    <h6 class="title">Category</h6>
+                                                                                    <div class="shop-submenu">
+                                                                                        <ul id="category-options">
+                                                                                            <li class="chosen"><a href="#">New</a></li>
+                                                                                            <li id="category-li"><a id="category-a">New</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>-->
+                                        <!--                                        <div class="toggle-list product-color active">
+                                                                                    <h6 class="title">COLOR</h6>
+                                                                                    <div class="shop-submenu">
+                                                                                        <ul id="color-options">
+                                                                                            <li class="chosen" style="border-color: red;"><a style="background: red;" href="#" class="color-extra-02"></a></li>
+                                                                                            <li style="border-color: red;" id="color-li">
+                                                                                                <a id="color-a" style="background: red;" class="color-extra-02"></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>-->
+
+                                        <!--                                        <div class="toggle-list product-color active">
+                                                                                    <h6 class="title">COLOR</h6>
+                                                                                    <div class="shop-submenu">
+                                                                                        <ul id="color-options">
+                                                                                            <li class="chosen"><a href="#">128 GB</a></li>
+                                                                                            <li id="color-li"><a id="color-a">0</a>
+                                                                                             <li style="border-color: red;" id="color-li">
+                                                                                        <a id="color-a" style="background: red;" class="color-extra-02"></a></li>
+                                                                              
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                        -->          
+                                        <!-- Brand Filter -->
+                                        <div class="toggle-list product-categories active">
+                                            <h6 class="title">BRAND</h6>
+                                            <div class="shop-submenu">
+                                                <ul id="brand-options" class="">
+                                                    <li id="brand-li" style="display:none;"><a id="brand-a">Brand</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Category Filter -->
+                                        <div class="toggle-list product-categories product-gender active">
+                                            <h6 class="title">Category</h6>
+                                            <div class="shop-submenu">
+                                                <ul id="category-options" class="custom-ul">
+                                                    <li id="category-li" style="display:none;"><a id="category-a">Category</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Color Filter -->
+                                        <div class="toggle-list product-color active">
+                                            <h6 class="title">COLOR</h6>
+                                            <div class="shop-submenu">
+                                                <ul id="color-options" class="custom-ul">
+                                                    <li id="color-li" style="display:none;"><a id="color-a">Color</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Slider -->
+                                        <div class="price_slider_wrapper">
+                                            <h3 class="widget_title">Filter by Price</h3>
+                                            <div class="price-slider">
+                                                <input type="range" min="0" max="1000000" value="0" step="1000" class="form-range" id="slider-range">
+                                                <div id="amount" class="price-labels">Rs.0+</div>
+                                            </div>
+                                            <div class="range-buttons mt-3">
+                                                <button class="vs-btn style4 w-100 mt-3" onclick="searchProducts(0);">Search Watches</button>
+                                                <button type="reset" class="btn btn-outline-primary btn-sm">Reset All</button>
+                                            </div>
+                                        </div>
+
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-                  <h3 class="product-title"><a href="shop-details.html">Tickr Chrono Black</a></h3>
-                  <span class="product-price">$199.00</span>
-                  <a href="checkout.html" class="vs-btn style2 w-100 mt-2">Buy Now</a>
                 </div>
-              </div>
             </div>
-          </div>
+        </section>
 
-          <div class="col-lg-3">
-            <div class="sidebar-area tours-sidebar">
-              <div class="widget">
-                <h3 class="widget_title">Find Your Watch</h3>
-                <p class="widget_text">Search and filter through our premium collection of wristwatches.</p>
-                <form class="booking-form">
-                  <div class="form-group">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search Watch Name" />
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-industry"></i>
-                    <input type="text" placeholder="Brand (e.g. Omega, Rolex)" />
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-tag"></i>
-                    <select class="form-select" name="category">
-                      <option selected disabled hidden>Select Category</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="unisex">Unisex</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-palette"></i>
-                    <input type="text" placeholder="Color (e.g. Black, Silver)" />
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-box"></i>
-                    <select class="form-select" name="stock">
-                      <option selected disabled hidden>Stock Availability</option>
-                      <option value="in">In Stock</option>
-                      <option value="out">Out of Stock</option>
-                    </select>
-                  </div>
+        <footer id="footer-placeholder"></footer>
+        <a href="#" class="scrollToTop scroll-btn"><i class="far fa-arrow-up"></i></a>
 
-                  <div class="price_slider_wrapper">
-                    <h3 class="widget_title">Filter by Price</h3>
-                    <div class="price-slider">
-                      <input type="range" min="0" max="1000000" value="0" class="form-range" id="priceRange">
-                      <div class="price-labels">
-                        <span>Rs.0</span>
-                        <span>Rs.1,000,000</span>
-                      </div>
-                    </div>
-                    <div class="range-buttons mt-3">
-                      <button type="button" class="vs-btn style4">Apply</button>
-                      <button type="reset" class="btn btn-primary">Reset All</button>
-                    </div>
-                  </div>
+        <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/vendor/slick.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/jquery-ui.min.js"></script>
+        <script src="assets/js/circle-progress.min.js"></script>
+        <script src="assets/js/vendor/imagesLoaded.js"></script>
+        <script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/topBottom.js"></script>
+        <script src="assets/js/advSearch.js"></script>
+        <script src="assets/js/notification.js"></script>
 
-                  <div class="sidebar-search">
-                    <form class="search-form">
-                      <input type="text" class="form-control" placeholder="Search products...">
-                      <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
-                    </form>
-                  </div>
-
-                  <button class="vs-btn style4 w-100 mt-3">Search Watches</button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer id="footer-placeholder"></footer>
-  <a href="#" class="scrollToTop scroll-btn"><i class="far fa-arrow-up"></i></a>
-
-  <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/slick.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="assets/js/jquery-ui.min.js"></script>
-  <script src="assets/js/circle-progress.min.js"></script>
-  <script src="assets/js/imagesLoaded.js"></script>
-  <script src="assets/js/isotope.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/topBottom.js"></script>
-
-</body>
+    </body>
 
 </html>

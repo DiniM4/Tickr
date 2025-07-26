@@ -19,9 +19,7 @@
         <mapping class="hibernate.Brand"/>
         <mapping class="hibernate.Model"/>
         <mapping class="hibernate.Color"/>
-        <mapping class="hibernate.Quality"/>
         <mapping class="hibernate.Status"/>
-        <mapping class="hibernate.Storage"/>
         <mapping class="hibernate.Category"/>
         <mapping class="hibernate.Product" />
 
