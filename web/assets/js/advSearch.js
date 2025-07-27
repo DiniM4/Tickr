@@ -45,7 +45,7 @@ async function searchProducts(firstResult) {
     const color_name = document.querySelector("#color-options .chosen a")?.innerHTML;
 
     const price_start = Number(document.getElementById("slider-range").value);
-    const price_end = 1000000;
+    const price_end = 10000000000;
 
     const sort_value = document.getElementById("st-sort")?.value || "Sort by Latest";
 
