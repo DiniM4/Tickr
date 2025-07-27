@@ -119,8 +119,33 @@ async  function  loadsData() {
 
 }
 
-function addToCart(productId, qty) {
 
-    console.log(productId + "" + qty);
+
+
+async function addToCart(productId, qty) {
+
+    //console.log(productId + " " + qty);
+    
+    const popup =new Notification();
+    
+    const response = await fetch("AddToCart?prId="+productId+"&qty="+qty);
+    
+    if(response.ok){
+        
+            const json =await response.json();
+            if(json.status){
+                popup.success({
+                    message:json.message
+                });
+            }else{
+                popup.error({
+                    message:"something went wrong"
+                });
+            }
+        
+    }else{
+        
+    }
+
+
 }
-

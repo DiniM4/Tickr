@@ -73,22 +73,22 @@
                 padding: 0 !important;
             }
 
-            
-/*            .product-actions {
-                background: rgba(255, 255, 255, 0.9);
-                opacity: 0;
-                transition: all 0.3s ease;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                padding: 10px;
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-            }*/
 
-            
+            /*            .product-actions {
+                            background: rgba(255, 255, 255, 0.9);
+                            opacity: 0;
+                            transition: all 0.3s ease;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            padding: 10px;
+                            display: flex;
+                            justify-content: center;
+                            gap: 10px;
+                        }*/
+
+
             /* Improved Bootstrap carousel controls */
             #productCarousel .carousel-control-prev,
             #productCarousel .carousel-control-next {
@@ -171,8 +171,8 @@
                 font-size: 2.5rem;
                 font-weight: bold;
             }
-            
-            
+
+
 
         </style>
     </head>
@@ -670,17 +670,32 @@
                                             </p>
 
                                             <!-- Start Product Action Wrapper  -->
-                                            <div class="product-action-wrapper d-flex-center">
+                                            <!--<div class="product-action-wrapper d-flex-center">-->
                                                 <!-- Start Quentity Action  -->
-                                                <div class="pro-qty"><input type="text" value="1" id="add-to-cart-qty"></div>
+                                                <!--<div class="pro-qty"><input type="text" value="1" id="add-to-cart-qty"></div>-->
                                                 <!-- End Quentity Action  -->
 
                                                 <!-- Start Product Action  -->
-                                                <ul class="product-action d-flex-center mb--0">
-                                                    <li class="add-to-cart"><a href="#" class="axil-btn btn-bg-primary" id="add-to-cart-main">Add to Cart</a></li>
-                                                    <li class="wishlist"><a href="#" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
-                                                </ul>
+                                                <!--<ul class="product-action d-flex-center mb--0">-->
+                                                    <!--<li class="add-to-cart"><a href="#" class="axil-btn btn-bg-primary" id="add-to-cart-main">Add to Cart</a></li>-->
+                                                    <!--<li class="wishlist"><a href="#" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>-->
+                                                <!--</ul>-->
                                                 <!-- End Product Action  -->
+                                            <!--</div>-->
+
+
+                                            <div class="product-actions">
+
+                                                <div class="pro-qty"><input type="text" value="1" id="add-to-cart-qty"></div>
+
+                                                <a href="#" class="icon-btn" title="Wishlist"><i class="fas fa-heart"></i></a>
+
+                                                <a href="cart.html" class="icon-btn" title="Add to Cart"
+                                                   id="add-to-cart-main" ><i class="fas fa-shopping-cart"></i></a>
+
+                                                <a href="#" class="icon-btn" title="Add to Cart"
+                                                   id="simlier-product-a2"><i class="fas fa-eye"></i></a>      
+
                                             </div>
 
 

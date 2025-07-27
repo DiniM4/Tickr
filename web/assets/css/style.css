@@ -7462,10 +7462,12 @@ Header Customization
   font-weight: 400;
   border-radius: 4px;
 }
+
 .cart_table .qut-btn:hover {
   background-color: var(--theme-color2);
   border-color: var(--theme-color2);
 }
+
 .cart_table .qty-input {
   vertical-align: middle;
   background-color: transparent;
