@@ -8,6 +8,8 @@ async function sloadData() {
             LoadOptions("brand", json.brandList, "name");
             LoadOptions("category", json.catList, "value");
             LoadOptions("color", json.colorList, "value");
+            // Load initial products
+            searchProducts(0); // <-- Add this line
         }
     }
 }
@@ -15,14 +17,12 @@ async function sloadData() {
 function LoadOptions(prefix, datalist, property) {
     const options = document.getElementById(prefix + "-options");
     const li = document.getElementById(prefix + "-li");
-
     options.innerHTML = "";
 
     datalist.forEach(item => {
         const liClone = li.cloneNode(true);
         liClone.removeAttribute("id");
         liClone.style.display = "block";
-
         const aTag = liClone.querySelector("a");
         aTag.removeAttribute("id");
         aTag.innerHTML = item[property];
@@ -30,6 +30,7 @@ function LoadOptions(prefix, datalist, property) {
         liClone.addEventListener("click", function () {
             document.querySelectorAll(`#${prefix}-options li`).forEach(el => el.classList.remove("chosen"));
             this.classList.add("chosen");
+            searchProducts(0); // <-- Add this to trigger search on filter select
         });
 
         options.appendChild(liClone);
