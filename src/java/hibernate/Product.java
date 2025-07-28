@@ -221,4 +221,8 @@ public class Product implements Serializable {
         this.status = status;
     }
 
+    public void setUser(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/web/assets/js/advSearch.js</file>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/src/java/controller/AdvanceSearch.java</file>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/web/my-account.html</file>
+            <file>file:/C:/Users/Malindu/Documents/Java_Web/web/shop.html</file>
+        </group>
     </open-files>
 </project-private>

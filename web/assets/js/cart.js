@@ -44,6 +44,8 @@ async function loadCartItems() {
                                 </tr>`
                 
                 cart_item_container.innerHTML += tableData;
+                
+
             });
 
             document.getElementById("order-total-quantity").innerHTML = totalQty;
@@ -59,17 +61,22 @@ async function loadCartItems() {
             
             popup.error(
                     {
+                        
                         message: json.message
+                        
                     }
             );
+            console.log(json.message);
         }
 
     } else {
+               console.log(json.message);
         popup.error(
                 {
                     message: "Cart Items Loading Failed"
                 }
         );
+ 
     }
 }
 
