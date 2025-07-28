@@ -176,32 +176,27 @@ function updateProductView(json) {
 
 
 
+
 async function addToCart(productId, qty) {
-    console.log(productId + " " + qty);
+        console.log(productId + " " + qty);
 
-    const  popup = new Notification();
-
-    const  response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
-
+    const popup = new Notification();// link notification js in single-product.html
+    const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
     if (response.ok) {
-        const  json = await response.json();
-
+        const json = await response.json(); // await response.text();
         if (json.status) {
             popup.success({
                 message: json.message
             });
-
-
         } else {
             popup.error({
-                message: "Somthing went wrong Please try agian "
+                message: "Something went wrong. Try again"
             });
 
         }
     } else {
         popup.error({
-            message: "Somthing went wrong Please try agian "
+            message: "Something went wrong. Try again"
         });
     }
 }
-

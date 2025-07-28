@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import com.google.gson.Gson;
@@ -26,13 +22,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-
 @WebServlet(name = "AddToCart", urlPatterns = {"/AddToCart"})
 public class AddToCart extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.println("cart");
+
         String prId = request.getParameter("prId");
         String qty = request.getParameter("qty");
         Gson gson = new Gson();
@@ -139,6 +137,7 @@ public class AddToCart extends HttpServlet {
             }
 
         }
+
 //        responseObject.addProperty("status", Boolean.TRUE);
         // add-to-cart-process-end
         response.setContentType("application/json");

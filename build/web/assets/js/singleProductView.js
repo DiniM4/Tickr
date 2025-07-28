@@ -126,7 +126,7 @@ async function addToCart(productId, qty) {
 
     //console.log(productId + " " + qty);
     
-    const popup =new Notification();
+    const popup = new Notification();
     
     const response = await fetch("AddToCart?prId="+productId+"&qty="+qty);
     

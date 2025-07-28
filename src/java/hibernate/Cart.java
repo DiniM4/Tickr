@@ -23,6 +23,9 @@ public class Cart implements Serializable {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "qty")
+    private int qty;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -30,9 +33,10 @@ public class Cart implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
-
-    @Column(name = "qty")
-    private int qty;
+    
+    public Cart(){
+        
+    }
 
     /**
      * @return the id
@@ -46,6 +50,20 @@ public class Cart implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the qty
+     */
+    public int getQty() {
+        return qty;
+    }
+
+    /**
+     * @param qty the qty to set
+     */
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     /**
@@ -74,20 +92,6 @@ public class Cart implements Serializable {
      */
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    /**
-     * @return the qty
-     */
-    public int getQty() {
-        return qty;
-    }
-
-    /**
-     * @param qty the qty to set
-     */
-    public void setQty(int qty) {
-        this.qty = qty;
     }
 
 }
