@@ -446,44 +446,45 @@
                             </thead>
                             <tbody id="cart-item-container">
 
-                                <tr class="cart_item"  id="cart-item-row">
+                                <tr class="cart_item" id="cart-item-row" style="display: none;">
                                     <td data-title="Product">
-                                        <a class="cart-productimage" href="#"><img width="80" height="80" src="assets/img/products/p-1-1.png" alt="Image" /></a>
+                                        <a class="cart-productimage" href="#" id="product-a1"><img width="80" height="80" src="" alt="Image" id="product-image" /></a>
                                     </td>
                                     <td data-title="Name">
-                                        <a class="cart-productname" href="shop-details.html">Modern Cow Boy Hat</a>
+                                        <a class="cart-productname" href="#" id="product-title"></a>
                                     </td>
                                     <td data-title="Price">
-                                        <span class="amount"><bdi><span>$</span>100</bdi></span>
+                                        <span class="amount">Rs.<span id="product-price"></span></span>
                                     </td>
                                     <td data-title="Quantity">
                                         <div class="quantity">
-                                            <input type="number" class="qty-input" value="1"/>
+                                            <input type="number" class="qty-input" value="1" id="product-qty"/>
                                         </div>
                                     </td>
                                     <td data-title="Total">
-                                        <span class="amount"><bdi><span>$</span>100</bdi></span>
+                                        <span class="amount">Rs.<span id="product-total"></span></span>
                                     </td>
                                     <td data-title="Remove">
                                         <a href="#" class="remove"><i class="fal fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
 
-                               
-                                <tr>
-                                    <td colspan="6" class="actions">
-                                        <div class="vs-cart-coupon">
-                                            <input type="text" class="form-control" placeholder="Coupon Code..." />
-                                            <button type="submit" class="vs-btn style4">
-                                                Apply Coupon
-                                            </button>
-                                        </div>
-                                        <button type="submit" class="vs-btn style4">
-                                            Update cart
-                                        </button>
-                                        <a href="shop.html" class="vs-btn style4">Continue Shopping</a>
-                                    </td>
-                                </tr>
+
+                                <!--                               
+                                                                <tr>
+                                                                    <td colspan="6" class="actions">
+                                                                        <div class="vs-cart-coupon">
+                                                                            <input type="text" class="form-control" placeholder="Coupon Code..." />
+                                                                            <button type="submit" class="vs-btn style4">
+                                                                                Apply Coupon
+                                                                            </button>
+                                                                        </div>
+                                                                        <button type="submit" class="vs-btn style4">
+                                                                            Update cart
+                                                                        </button>
+                                                                        <a href="shop.html" class="vs-btn style4">Continue Shopping</a>
+                                                                    </td>
+                                                                </tr>-->
                             </tbody>
                         </table>
                     </div>
@@ -706,7 +707,7 @@
         <!--==============================
           All Js File
       ============================== -->
-      
+
         <script src="assets/js/cart.js"></script>
         <!-- Jquery -->
         <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>

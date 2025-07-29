@@ -1,4 +1,3 @@
-
 package controller;
 
 import com.google.gson.Gson;
@@ -7,73 +6,78 @@ import hibernate.Cart;
 import hibernate.HibernateUtil;
 import hibernate.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.servlet.http.*;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author Dilhara
- */
 @WebServlet(name = "LoadCartItems", urlPatterns = {"/LoadCartItems"})
 public class LoadCartItems extends HttpServlet {
 
+  
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
         Gson gson = new Gson();
         JsonObject responseObject = new JsonObject();
-        responseObject.addProperty("status", false);
 
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) { //DB Cart
-            SessionFactory sf = HibernateUtil.getSessionFactory();
-            Session s = sf.openSession();
-            Criteria c1 = s.createCriteria(Cart.class);
-            c1.add(Restrictions.eq("user", user));
-            List<Cart> cartList = c1.list();
-            if (cartList.isEmpty()) {
-                responseObject.addProperty("message", "Your cart is empty...");
-            } else {
-                for (Cart cart : cartList) {
-                    cart.getProduct().setUser(null);
-              
-                    cart.setUser(null);
-                }
-                responseObject.addProperty("status", true);
-                responseObject.addProperty("message", "Cart items successfully loded");
-                responseObject.add("cartItems", gson.toJsonTree(cartList));
-            }
-        } else {//sessionCart
-            ArrayList<Cart> sessionCarts = (ArrayList<Cart>) request.getSession().getAttribute("sessionCart");
-            if (sessionCarts != null) {
-                if (sessionCarts.isEmpty()) {
-                    responseObject.addProperty("message", "Your cart is empty...");
-                } else {
-                    for (Cart sessionCart : sessionCarts) {
-                        sessionCart.getProduct().setUser(null);
-                        sessionCart.setUser(null);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            User user = (User) request.getSession().getAttribute("user");
+
+            if (user != null) {
+                // User logged in: load cart items from DB
+                SessionFactory sf = HibernateUtil.getSessionFactory();
+                Session session = sf.openSession();
+
+                Criteria criteria = session.createCriteria(Cart.class);
+                criteria.add(Restrictions.eq("user", user));
+                List<Cart> cartList = criteria.list();
+                session.close();
+
+                if (cartList != null && !cartList.isEmpty()) {
+                    for (Cart cart : cartList) {
+                        // Do NOT call cart.getProduct().setUser(null);
+                        // Just nullify the user reference in cart to prevent circular JSON serialization
+                        cart.setUser(null);
                     }
                     responseObject.addProperty("status", true);
-                    responseObject.addProperty("message", "Cart items successfully loded");
-                    responseObject.add("cartItems", gson.toJsonTree(sessionCarts));
+                    responseObject.addProperty("message", "Cart items loaded successfully");
+                    responseObject.add("cartList", gson.toJsonTree(cartList));
+                } else {
+                    responseObject.addProperty("status", false);
+                    responseObject.addProperty("message", "Your cart is empty.");
                 }
             } else {
-                responseObject.addProperty("message", "Your cart is empty...");
+                // User not logged in: load from session cart
+                List<Cart> sessionCarts = (List<Cart>) request.getSession().getAttribute("sessionCart");
+                if (sessionCarts != null && !sessionCarts.isEmpty()) {
+                    for (Cart cart : sessionCarts) {
+                        // Do NOT call cart.getProduct().setUser(null);
+                        cart.setUser(null);
+                    }
+                    responseObject.addProperty("status", true);
+                    responseObject.addProperty("message", "Session cart loaded successfully");
+                    responseObject.add("cartList", gson.toJsonTree(sessionCarts));
+                } else {
+                    responseObject.addProperty("status", false);
+                    responseObject.addProperty("message", "Your cart is empty.");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();  // Logs to server console for debugging
+            responseObject.addProperty("status", false);
+            responseObject.addProperty("message", "Server error: " + e.getMessage());
         }
-        response.setContentType("application/json");
-        String toJson = gson.toJson(responseObject);
-        response.getWriter().write(toJson);
-    }
 
+        String json = gson.toJson(responseObject);
+        response.getWriter().write(json);
+    
+    }
+    
 }
