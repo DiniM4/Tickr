@@ -1,251 +1,176 @@
-// 
-//    payhere.onCompleted = function onCompleted(orderId) {
-//        const  popup = new Notification();
-//        popup.success({
-//           message:"Payment completed. Order Id "+orderId 
-//        });
-//        
-//       
-//    };
-//
-//   
-//    payhere.onDismissed = function onDismissed() {
-//       
-//        console.log("Payment dismissed");
-//    };
-//
-//   
-//    payhere.onError = function onError(error) {
-//        
-//        console.log("Error:"  + error);
-//    };
-//
-
-
-
-
-
-
 async function loadCheckoutData() {
-
-    console.log("jsok");
-
+    console.log("JS Loaded");
     const popup = new Notification();
 
     const response = await fetch("LoadCheckoutData");
-
-    if (response.ok) {
-        console.log("wade ok");
-
-
-        const json = await response.json();
-
-        if (json.status) {
-
-            console.log(json);
-            const userAddress = json.userAddress;
-            const cityList = json.cityList;
-            const cartItems = json.cartList;
-            const deliveryTypes = json.deliveryTypes;
-
-            const city_select = document.getElementById("city-select");
-
-            cityList.forEach(city => {
-
-                let option = document.createElement("option");
-                option.value = city.id;
-                option.innerHTML = city.name;
-
-                city_select.appendChild(option);
-
-            });
-
-            //load current address
-
-            const current_address_checkbox = document.getElementById("checkbox1");
-
-            current_address_checkbox.addEventListener("change", function () {
-
-                let first_name = document.getElementById("first-name");
-                let last_name = document.getElementById("last-name");
-                let line_one = document.getElementById("line-one");
-                let line_two = document.getElementById("line-two");
-                let postal_code = document.getElementById("postal-code");
-                let mobile = document.getElementById("mobile");
-                let email = document.getElementById("email");
-
-                if (current_address_checkbox.checked) {
-
-                    first_name.value = userAddress.user.first_name;
-                    last_name.value = userAddress.user.last_name;
-                    city_select.value = userAddress.city.id;
-                    city_select.disabled = true;
-                    city_select.dispatchEvent(new Event("change"));
-                    line_one.value = userAddress.lineOne;
-                    line_two.value = userAddress.lineTwo;
-                    postal_code.value = userAddress.postalCode;
-                    mobile.value = userAddress.user.mobile;
-                    email.value = userAddress.user.email;
-
-
-
-                } else {
-
-                    first_name.value = "";
-                    last_name.value = "";
-                    city_select.value = 0;
-                    city_select.disabled = false;
-                    city_select.dispatchEvent(new Event("change"));
-                    line_one.value = "";
-                    line_two.value = "";
-                    postal_code.value = "";
-                    mobile.value = "";
-                    email = "";
-
-
-                }
-
-            });
-
-let st_tbody = document.getElementById("st-tbody");
-let st_item_tr = document.getElementById("st-item-tr");
-
-let st_subtotal_tr = document.getElementById("st-subtotal-tr");
-let st_shipping_charges_span = document.getElementById("st-product-shipping-charges");
-let st_total_amount_span = document.getElementById("st-order-total-amount");
-let st_subtotal_amount_span = document.getElementById("st-product-total"); // subtotal amount span
-
-st_tbody.innerHTML = "";
-
-let subtotal = 0;
-
-cartItems.forEach(cart => {
-    let clone = st_item_tr.cloneNode(true);
-    clone.removeAttribute("id");
-    clone.style.display = "";
-
-    clone.querySelector("#product-a1").href = "single-product.html?id=" + cart.product.id;
-    clone.querySelector("#product-image").src = "product-images/" + cart.product.id + "/image1.jpeg";
-    clone.querySelector("#st-product-title").innerHTML = cart.product.title;
-    clone.querySelector("#st-product-qty").innerHTML = cart.qty;
-
-    let unitPrice = Number(cart.product.price);
-    let itemTotal = unitPrice * cart.qty;
-    subtotal += itemTotal;
-
-    clone.querySelector("#st-product-price").innerHTML = unitPrice.toFixed(2);
-    clone.querySelector("#st-product-total-amount").innerHTML = itemTotal.toFixed(2);
-
-    st_tbody.appendChild(clone);
-});
-
-// Display subtotal
-st_subtotal_amount_span.innerHTML = subtotal.toFixed(2);
-
-// Shipping calculation and total
-let shipping_charges = 0;
-
-city_select.addEventListener("change", () => {
-    let cityName = city_select.options[city_select.selectedIndex].innerHTML.trim().toLowerCase();
-
-    // Use deliveryTypes properly
-    shipping_charges = (cityName === "colombo")
-        ? deliveryTypes[0].price
-        : deliveryTypes[1].price;
-
-    st_shipping_charges_span.innerHTML = shipping_charges.toFixed(2);
-
-    let total = subtotal + shipping_charges;
-    st_total_amount_span.innerHTML = total.toFixed(2);
-});
-
-// Trigger once on load
-city_select.dispatchEvent(new Event("change"));
-
-        } else {
-            if (json.message === "Empty cart") {
-                popup.error({
-                    message: "Emmpty cart . Please add some products"
-                });
-                window.location = "index.html";
-            } else {
-
-
-                popup.error({
-                    message: json.message
-                });
-            }
-
-        }
-
-
-
-    } else {
+    if (!response.ok) {
         if (response.status === 401) {
             window.location = "sign-in.html";
+        } else {
+            popup.error({ message: "Failed to load checkout data." });
         }
-//        if(response.status ===404){
-//            window.location= "404.html";
-//        }
-
+        return;
     }
 
+    const json = await response.json();
+    if (!json.status) {
+        if (json.message === "Empty cart") {
+            popup.error({ message: "Empty cart. Please add some products." });
+            window.location = "index.html";
+        } else {
+            popup.error({ message: json.message });
+        }
+        return;
+    }
 
-}
+    const userAddress = json.userAddress;
+    const cityList = json.cityList;
+    const cartItems = json.cartList;
+    const deliveryTypes = json.deliveryTypes;
 
-async function checkout() {
-    let checkbox1 = document.getElementById("checkbox1").checked;
-    let first_name = document.getElementById("first-name");
-    let last_name = document.getElementById("last-name");
-    let line_one = document.getElementById("line-one");
-    let line_two = document.getElementById("line-two");
-    let postal_code = document.getElementById("postal-code");
-    let mobile = document.getElementById("mobile");
     const city_select = document.getElementById("city-select");
 
-    let data = {
-        isCurrentAddress: checkbox1,
-        firstName: first_name.value,
-        lastName: last_name.value,
-        citySelect: city_select.value,
-        lineOne: line_one.value,
-        lineTwo: line_two.value,
-        postalCode: postal_code.value,
-        mobile: mobile.value
+    // Populate city list
+    cityList.forEach(city => {
+        const option = document.createElement("option");
+        option.value = city.id;
+        option.textContent = city.name;
+        city_select.appendChild(option);
+    });
+
+    // Handle "Same as current address" checkbox
+    const current_address_checkbox = document.getElementById("checkbox1");
+    current_address_checkbox.addEventListener("change", () => {
+        const first_name = document.getElementById("first-name");
+        const last_name = document.getElementById("last-name");
+        const line_one = document.getElementById("line-one");
+        const line_two = document.getElementById("line-two");
+        const postal_code = document.getElementById("postal-code");
+        const mobile = document.getElementById("mobile");
+        const email = document.getElementById("email");
+
+        if (current_address_checkbox.checked) {
+            first_name.value = userAddress.user.first_name;
+            last_name.value = userAddress.user.last_name;
+            city_select.value = userAddress.city.id;
+            city_select.disabled = true;
+            city_select.dispatchEvent(new Event("change"));
+            line_one.value = userAddress.lineOne;
+            line_two.value = userAddress.lineTwo;
+            postal_code.value = userAddress.postalCode;
+            mobile.value = userAddress.user.mobile;
+            email.value = userAddress.user.email;
+        } else {
+            first_name.value = "";
+            last_name.value = "";
+            city_select.value = 0;
+            city_select.disabled = false;
+            city_select.dispatchEvent(new Event("change"));
+            line_one.value = "";
+            line_two.value = "";
+            postal_code.value = "";
+            mobile.value = "";
+            email.value = "";
+        }
+    });
+
+    // Load cart table
+    const st_tbody = document.getElementById("st-tbody");
+    const st_item_tr = document.getElementById("st-item-tr");
+    const st_shipping_charges_span = document.getElementById("st-product-shipping-tr");
+    const st_total_amount_span = document.getElementById("st-order-total-amount");
+    const st_subtotal_amount_span = document.getElementById("st-product-total");
+
+    st_tbody.innerHTML = ""; // clear
+
+    let subtotal = 0;
+
+    cartItems.forEach(cart => {
+        const clone = st_item_tr.cloneNode(true);
+        clone.removeAttribute("id");
+        clone.style.display = "";
+
+        clone.querySelector("#product-a1").href = "single-product.html?id=" + cart.product.id;
+        clone.querySelector("#product-image").src = "product-images/" + cart.product.id + "/image1.jpeg";
+        clone.querySelector("#st-product-title").textContent = cart.product.title;
+        clone.querySelector("#st-product-qty").textContent = cart.qty;
+
+        const unitPrice = Number(cart.product.price);
+        const itemTotal = unitPrice * cart.qty;
+        subtotal += itemTotal;
+
+        clone.querySelector("#st-product-price").textContent = unitPrice.toFixed(2);
+        clone.querySelector("#st-product-total-amount").textContent = itemTotal.toFixed(2);
+
+        st_tbody.appendChild(clone);
+    });
+
+    // Update subtotal
+    st_subtotal_amount_span.textContent = subtotal.toFixed(2);
+
+    // Calculate shipping + total using delivery type name logic
+    const updateShippingAndTotal = () => {
+        const selectedCityName = city_select.options[city_select.selectedIndex].textContent.trim().toLowerCase();
+
+        let shipping_charges = 0;
+
+        if (selectedCityName.includes("Colombo")) {
+            const within = deliveryTypes.find(dt => dt.name.toLowerCase().includes("Within Colombo"));
+            shipping_charges = within ? Number(within.price) : 0;
+        } else {
+            const outside = deliveryTypes.find(dt => dt.name.toLowerCase().includes("Out Of Colombo"));
+            shipping_charges = outside ? Number(outside.price) : 0;
+        }
+
+        st_shipping_charges_span.textContent = shipping_charges.toFixed(2);
+        const total = subtotal + shipping_charges;
+        st_total_amount_span.textContent = total.toFixed(2);
     };
 
-    let dataJSON = JSON.stringify(data);
+    city_select.addEventListener("change", updateShippingAndTotal);
+    city_select.dispatchEvent(new Event("change")); // initial trigger
+}
+
+// Checkout function remains unchanged
+async function checkout() {
+    const popup = new Notification();
+
+    const checkbox1 = document.getElementById("checkbox1").checked;
+    const first_name = document.getElementById("first-name").value;
+    const last_name = document.getElementById("last-name").value;
+    const line_one = document.getElementById("line-one").value;
+    const line_two = document.getElementById("line-two").value;
+    const postal_code = document.getElementById("postal-code").value;
+    const mobile = document.getElementById("mobile").value;
+    const city_select = document.getElementById("city-select").value;
+
+    const data = {
+        isCurrentAddress: checkbox1,
+        firstName: first_name,
+        lastName: last_name,
+        citySelect: city_select,
+        lineOne: line_one,
+        lineTwo: line_two,
+        postalCode: postal_code,
+        mobile: mobile
+    };
 
     const response = await fetch("Checkout", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: dataJSON
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
     });
 
-
-    const popup = new Notification();
-
-    if (response.ok) {
-        const json = await response.json();
-        if (json.status) {
-            console.log(json);
-            //payhere process
-            payhere.startPayment(json.payhereJson);
-
-        } else {
-            popup.error({
-                message: json.message
-            });
-        }
-    } else {
-        popup.error({
-            message: "Something went wrong c. Please try again! "
-        });
+    if (!response.ok) {
+        popup.error({ message: "Something went wrong. Please try again!" });
+        return;
     }
 
-
-
+    const json = await response.json();
+    if (json.status) {
+        console.log(json);
+        payhere.startPayment(json.payhereJson); // Launch PayHere
+    } else {
+        popup.error({ message: json.message });
+    }
 }
-
