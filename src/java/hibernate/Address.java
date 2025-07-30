@@ -1,4 +1,3 @@
-
 package hibernate;
 
 import java.io.Serializable;
@@ -38,7 +37,9 @@ public class Address implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    public User user;
+
+ 
 
     /**
      * @return the id
@@ -123,5 +124,11 @@ public class Address implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+
+    /**
+     * @return the mobile
+     */
+
+
 
 }

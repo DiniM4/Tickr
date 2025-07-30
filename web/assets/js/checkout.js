@@ -1,3 +1,10 @@
+
+
+
+
+
+/* global payhere */
+
 async function loadCheckoutData() {
     console.log("JS Loaded");
     const popup = new Notification();
@@ -7,7 +14,7 @@ async function loadCheckoutData() {
         if (response.status === 401) {
             window.location = "sign-in.html";
         } else {
-            popup.error({ message: "Failed to load checkout data." });
+            popup.error({message: "Failed to load checkout data."});
         }
         return;
     }
@@ -15,10 +22,10 @@ async function loadCheckoutData() {
     const json = await response.json();
     if (!json.status) {
         if (json.message === "Empty cart") {
-            popup.error({ message: "Empty cart. Please add some products." });
+            popup.error({message: "Empty cart. Please add some products."});
             window.location = "index.html";
         } else {
-            popup.error({ message: json.message });
+            popup.error({message: json.message});
         }
         return;
     }
@@ -131,6 +138,35 @@ async function loadCheckoutData() {
     city_select.dispatchEvent(new Event("change")); // initial trigger
 }
 
+
+
+
+
+payhere.onCompleted = function onCompleted(orderId) {
+    const  popup = new Notification();
+    popup.success({
+        message: "Payment completed. Order Id " + orderId
+    });
+
+
+};
+
+
+payhere.onDismissed = function onDismissed() {
+
+    console.log("Payment dismissed");
+};
+
+
+payhere.onError = function onError(error) {
+
+    console.log("Error:" + error);
+};
+
+
+
+
+
 // Checkout function remains unchanged
 async function checkout() {
     const popup = new Notification();
@@ -142,9 +178,10 @@ async function checkout() {
     const line_two = document.getElementById("line-two").value;
     const postal_code = document.getElementById("postal-code").value;
     const mobile = document.getElementById("mobile").value;
+    const email = document.getElementById("email").value;
     const city_select = document.getElementById("city-select").value;
 
-    const data = {
+    let data = {
         isCurrentAddress: checkbox1,
         firstName: first_name,
         lastName: last_name,
@@ -152,25 +189,45 @@ async function checkout() {
         lineOne: line_one,
         lineTwo: line_two,
         postalCode: postal_code,
-        mobile: mobile
+        mobile: mobile,
+        email: email
     };
+
+    let dataJSON = JSON.stringify(data);
+
+    try {
 
     const response = await fetch("Checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: dataJSON
     });
 
-    if (!response.ok) {
+
+
+    if (response.ok) {
+        const json = await response.json();
+        if (json.status) {
+            console.log(json);
+            //payhere process
+            payhere.startPayment(json.payhereJson);
+
+        } else {
+            popup.error({
+                message: json.message
+            });
+        }
+    } else {
+        popup.error({
+            message: "Something went wrong c. Please try again! "
+        });
+    }
+ } catch (err) {
+        console.error("Fetch error:", err);
         popup.error({ message: "Something went wrong. Please try again!" });
-        return;
     }
 
-    const json = await response.json();
-    if (json.status) {
-        console.log(json);
-        payhere.startPayment(json.payhereJson); // Launch PayHere
-    } else {
-        popup.error({ message: json.message });
-    }
+
 }

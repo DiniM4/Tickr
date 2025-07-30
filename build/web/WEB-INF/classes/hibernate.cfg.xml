@@ -8,7 +8,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/tickerdb?useSSL=false</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">SMsuperX@262</property>
+        <property name="hibernate.connection.password">2003108</property>
         <property name="hibernate.show_sql">true</property>
         
         <!-- Add your entity mappings -->
@@ -23,6 +23,12 @@
         <mapping class="hibernate.Category"/>
         <mapping class="hibernate.Product" />
         <mapping class="hibernate.Cart" />
+        <mapping class="hibernate.DeliveryType" />
+        <mapping class="hibernate.Orders" />
+        <mapping class="hibernate.OrderItems" />
+        <mapping class="hibernate.OrderStatus" />
+
+
 
         
 

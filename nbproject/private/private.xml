@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/assets/js/cart.js</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/index.html</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/controller/CheckSessionCart.java</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/hibernate/Product.java</file>
             <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/cart.html</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/model/SessionFilter.java</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/assets/js/index.js</file>
-            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/controller/LoadCartItems.java</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/hibernate/Product.java</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/checkout.html</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/hibernate/Cart.java</file>
         </group>
     </open-files>
 </project-private>
