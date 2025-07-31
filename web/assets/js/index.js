@@ -1,10 +1,22 @@
 function indexOnloadFunctions() {
     checkSessionCart();
     loadProductData();
+    checkSessionWish();
 }
 async function checkSessionCart() {
     const popup = new Notification();
     const response = await fetch("CheckSessionCart");
+    if (!response.ok) {
+        popup.error({
+            message: "Something went wrong! Try again shortly"
+        });
+    }
+}
+
+
+async function checkSessionWish() {
+    const popup = new Notification();
+    const response = await fetch("CheckSessionWishlist");
     if (!response.ok) {
         popup.error({
             message: "Something went wrong! Try again shortly"
@@ -73,6 +85,11 @@ function loadNewArrivals(json) {
                         addToCart(item.id, 1);
                         e.preventDefault();
                     });
+                     productCloneHtml.querySelector("#simler-product-add-to-wish").addEventListener(
+                            "click", (e) => {
+                        addToWish(item.id);
+                        e.preventDefault();
+                    });
                     productCloneHtml.querySelector("#simlier-product-a2").href = "single-product-view.html?id=" + item.id;
                     productCloneHtml.querySelector("#similer-product-title").innerHTML = item.title;
 
@@ -114,5 +131,29 @@ async function addToCart(productId, qty) {
         });
     }
 }
+
+
+
+async function addToWish(productId) {
+    console.log("Adding to wishlist product id:", productId);
+
+    const popup = new Notification();
+    const response = await fetch("AddToWishlist?prId=" + productId);
+
+    console.log("Response status:", response.status);
+
+    if (response.ok) {
+        const json = await response.json();
+        console.log("Response JSON:", json);
+        if (json.status) {
+            popup.success({ message: json.message });
+        } else {
+            popup.error({ message: json.message || "Something went wrong. Try again" });
+        }
+    } else {
+        popup.error({ message: "Server error. Try again" });
+    }
+}
+
 
 

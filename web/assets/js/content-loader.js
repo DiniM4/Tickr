@@ -118,7 +118,7 @@ const data = `<div class="container">
                             <div class="col-auto d-none d-xl-block">
                                 <div class="header-btns">
                                     <button a href="shop.html" class="searchBoxTggler"><i class="fal fa-search"></i></button>
-                                    <button class="sideCartToggler" onclick="viewCart();"><i class="fal fa-shopping-bag"></i><span
+                                    <button class="sideCartToggler"><i class="fal fa-shopping-bag"></i><span
                                             class="button-badge">2</span></button>
                                     <button class="sideMenuToggler"><i class="fal fa-bars"></i></button>
                                 </div>
@@ -128,7 +128,7 @@ const data = `<div class="container">
                 </div>
             </div>`;
         document.querySelector("header").innerHTML = data;
-}
+        }
 
 function loadFooter() {
 const data = ` <div class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer-bg.jpg">
@@ -278,76 +278,62 @@ const data = ` <div class="footer-wrapper footer-layout1" data-bg-src="assets/im
         </div>
 
 <div class="closeMask"></div>`;
-    
         document.querySelector("footer").innerHTML = data;
-}
+        }
 
 
 async function viewCart() {
 const popup = new Notification();
+        try {
         const response = await fetch("LoadCartItems");
-        if (response.ok) {
-
-const json = await response.json();
-        if (json.status) {
-         console.log(json.cartItems);
+                if (response.ok) {
+        const json = await response.json();
+                if (json.status) {
         const side_panel_cart_item_list = document.getElementById("side-panel-cart-item-list");
-        side_panel_cart_item_list.innerHTML = "";
-        let total = 0;
-        let totalQty = 0;
-        json.cartItems.forEach(cart => {
-        let productSubTotal = cart.product.price * cart.qty;
-                total += productSubTotal;
-                totalQty += cart.qty;
-                let cartItem = `<ul class="cart_list">
-                            <li class="mini_cart_item">
-                                <a href=""single-product.html?id=${cart.product.id}"" class="remove"><i class="fal fa-trash-alt"></i></a> <a href="#">
-                                <img src="product-images/${cart.product.id}/image1.png"  alt="Cart Image" /></a>
-                               <div class="item-content">
-            <h3 class="item-title">
-                <a href="#">${cart.product.title}</a>
-            </h3>
-            <div class="item-price">
-                <span class="currency-symbol">Rs. </span>
-                ${(new Intl.NumberFormat("en-US", {
-                minimumFractionDigits: 2
-                }).format(cart.product.price))}
-            </div>
-            <div class="pro-qty item-quantity">
-                <input type="number" class="quantity-input" value="${cart.qty}">
-            </div>
-        </div>
-                            </li>
-                          
-                        </ul>`;
-                side_panel_cart_item_list.innerHTML += cartItem;
-        });
-        document.getElementById("side-panel-cart-sub-total").innerHTML = new Intl.NumberFormat(
-        "en-US",
-        {
-        minimumFractionDigits: 2
-                })
-        .format(total);
+                side_panel_cart_item_list.innerHTML = "";
+                let total = 0;
+                json.cartItems.forEach(cart => {
+                let productSubTotal = cart.product.price * cart.qty;
+                        total += productSubTotal;
+                        const cartItem = `
+                        <li class="mini_cart_item">
+                            <a href="#" class="remove"><i class="fal fa-trash-alt"></i></a>
+                            <a href="single-product.html?id=${cart.product.id}">
+                                <img src="product-images/${cart.product.id}/image1.png" alt="Cart Image" />
+                            </a>
+                            <div class="item-content">
+                                <h3 class="item-title">
+                                    <a href="single-product.html?id=${cart.product.id}">${cart.product.title}</a>
+                                </h3>
+                                <div class="item-price">
+                                    <span class="currency-symbol">Rs. </span>
+                                    ${(cart.product.price).toFixed(2)}
+                                </div>
+                                <div class="pro-qty item-quantity">
+                                    <input type="number" class="quantity-input" value="${cart.qty}" readonly>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+                        side_panel_cart_item_list.innerHTML += cartItem;
+                });
+                document.getElementById("side-panel-cart-sub-total").innerText = `Rs. ${(total).toFixed(2)}`;
         } else {
-popup.error(
-        {
-        message: json.message
-                }
-);
+        popup.error({ message: json.message });
         }
-
-} else {
-popup.error(
-        {
-        message: "Cart Items Loading Failed"
-                }
-);
+        } else {
+        popup.error({ message: "Cart Items Loading Failed" });
         }
+        } catch (err) {
+popup.error({ message: "Unexpected error loading cart!" });
+        console.error(err);
+}
 }
 
-
-
-
-
+window.addEventListener("DOMContentLoaded", () => {
 loadHeader();
         loadFooter();
+        });
+
+
+

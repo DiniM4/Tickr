@@ -99,6 +99,11 @@ function updateProductView(json) {
             addToCart(product.id, 1);
             e.preventDefault();
         });
+    st_product_clone.querySelector("#st-product-add-to-wish").addEventListener(
+    "click", (e) => {
+        addToWish(product.id);
+        e.preventDefault();
+});
         st_product_clone.querySelector("#st-product-a-2").href = "single-product-view.html?id=" + product.id;
         st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
         st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
@@ -182,6 +187,31 @@ async function addToCart(productId, qty) {
 
     const popup = new Notification();// link notification js in single-product.html
     const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
+    if (response.ok) {
+        const json = await response.json(); // await response.text();
+        if (json.status) {
+            popup.success({
+                message: json.message
+            });
+        } else {
+            popup.error({
+                message: "Something went wrong. Try again"
+            });
+
+        }
+    } else {
+        popup.error({
+            message: "Something went wrong. Try again"
+        });
+    }
+}
+
+
+async function addToWish(productId) {
+        console.log(productId );
+
+    const popup = new Notification();// link notification js in single-product.html
+    const response = await fetch("AddToWishlist?prId=" + productId );
     if (response.ok) {
         const json = await response.json(); // await response.text();
         if (json.status) {

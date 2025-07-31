@@ -36,13 +36,21 @@ async  function  loadsData() {
 
 
 
-               //add to cart main button
+                //add to cart main button
                 const addToCartMain = document.getElementById("add-to-cart-main");
                 addToCartMain.addEventListener(
                         "click", (e) => {
                     addToCart(json.product.id, document.getElementById("add-to-cart-qty").value);
                     e.preventDefault();
                 });
+
+                const addToWishMain = document.getElementById("add-to-wishlist-main");
+                if (addToWishMain) {
+                    addToWishMain.addEventListener("click", (e) => {
+                        addToWish(json.product.id);
+                        e.preventDefault();
+                    });
+                }
 
                 //similer products
                 let smiler_product_main = document.getElementById("smiler-product-main");
@@ -58,6 +66,11 @@ async  function  loadsData() {
                         addToCart(item.id, 1);
                         e.preventDefault();
                     });
+                    productCloneHtml.querySelector("#simler-product-add-to-wish").addEventListener(
+                            "click", (e) => {
+                        addToWish(item.id);
+                        e.preventDefault();
+                    });
                     productCloneHtml.querySelector("#simlier-product-a2").href = "single-product-view.html?id=" + item.id;
                     productCloneHtml.querySelector("#similer-product-title").innerHTML = item.title;
 
@@ -65,7 +78,7 @@ async  function  loadsData() {
                     productCloneHtml.querySelector("#similer-product-price").innerHTML = new Intl.NumberFormat("en-US",
                             {minimumFractionDigits: 2}).format(item.price);
 
-                    productCloneHtml.querySelector("#similer-product-color").innerHTML =item.color.value;
+                    productCloneHtml.querySelector("#similer-product-color").innerHTML = item.color.value;
 //                    productCloneHtml.querySelector("#similer-product-color-background").style.backgroundColor = item.color.value;
 
                     smiler_product_main.appendChild(productCloneHtml);
@@ -125,27 +138,50 @@ async  function  loadsData() {
 async function addToCart(productId, qty) {
 
     //console.log(productId + " " + qty);
-    
+
     const popup = new Notification();
-    
-    const response = await fetch("AddToCart?prId="+productId+"&qty="+qty);
-    
-    if(response.ok){
-        
-            const json =await response.json();
-            if(json.status){
-                popup.success({
-                    message:json.message
-                });
-            }else{
-                popup.error({
-                    message:"something went wrong"
-                });
-            }
-        
-    }else{
-        
+
+    const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
+
+    if (response.ok) {
+
+        const json = await response.json();
+        if (json.status) {
+            popup.success({
+                message: json.message
+            });
+        } else {
+            popup.error({
+                message: "something went wrong"
+            });
+        }
+
+    } else {
+
     }
 
 
 }
+
+
+async function addToWish(productId) {
+    console.log("Adding to wishlist product id:", productId);
+
+    const popup = new Notification();
+    const response = await fetch("AddToWishlist?prId=" + productId);
+
+    console.log("Response status:", response.status);
+
+    if (response.ok) {
+        const json = await response.json();
+        console.log("Response JSON:", json);
+        if (json.status) {
+            popup.success({message: json.message});
+        } else {
+            popup.error({message: json.message || "Something went wrong. Try again"});
+        }
+    } else {
+        popup.error({message: "Server error. Try again"});
+    }
+}
+

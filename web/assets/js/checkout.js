@@ -140,6 +140,44 @@ async function loadCheckoutData() {
 
 
 
+async function loadCheckoutPage() {
+    const popup = new Notification();
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("product_id");
+
+    let url = "LoadCheckoutData";
+    if (productId) {
+        url += "?product_id=" + productId;
+    }
+
+    const response = await fetch(url);
+
+    if (response.ok) {
+        const json = await response.json();
+
+        if (json.status) {
+            if (json.singleProduct) {
+                // Load only this product to UI
+                const product = json.singleProduct;
+                document.getElementById("checkout-items").innerHTML = `
+                    <div>
+                        <h4>${product.title}</h4>
+                        <p>${product.category.name}</p>
+                        <p>$${product.price}</p>
+                    </div>
+                `;
+            } else if (json.cartList) {
+                // Load cart items
+            }
+        } else {
+            popup.showError(json.message || "Something went wrong");
+        }
+    }
+}
+
+
+
 
 
 payhere.onCompleted = function onCompleted(orderId) {
