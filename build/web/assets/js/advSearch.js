@@ -1,5 +1,5 @@
 async function sloadData() {
-    const response = await fetch("LoadsData");
+    const response = await fetch("Load Data");
     if (response.ok) {
         const json = await response.json();
         if (json.status) {
