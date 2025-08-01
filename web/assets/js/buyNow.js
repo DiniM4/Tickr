@@ -5,11 +5,11 @@
 
 /* global payhere */
 
-async function loadCheckoutData() {
+async function loadBuyNowData() {
     console.log("JS Loaded");
     const popup = new Notification();
 
-    const response = await fetch("LoadCheckoutData");
+    const response = await fetch("LoadBuyNow");
     if (!response.ok) {
         if (response.status === 401) {
             window.location = "sign-in.html";
@@ -169,7 +169,7 @@ payhere.onError = function onError(error) {
 
 
 // Checkout function remains unchanged
-async function checkout() {
+async function checkouts() {
     const popup = new Notification();
 
     const checkbox1 = document.getElementById("checkbox1").checked;
