@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/assets/js/t-adminSignIn.js</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/controller/SingleProduct.java</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/web/assets/js/singleProductView.js</file>
+            <file>file:/C:/Users/dinit/Documents/NetBeansProjects/Tickr/src/java/controller/AddToCart.java</file>
+        </group>
     </open-files>
 </project-private>

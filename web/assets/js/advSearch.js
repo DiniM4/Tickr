@@ -1,5 +1,5 @@
 async function sloadData() {
-    const response = await fetch("Load Data");
+    const response = await fetch("LoadsData");
     if (response.ok) {
         const json = await response.json();
         if (json.status) {
@@ -38,7 +38,6 @@ function LoadOptions(prefix, datalist, property) {
 }
 
 async function searchProducts(firstResult) {
-    event.preventDefault();
 
     const brand_name = document.querySelector("#brand-options .chosen a")?.innerHTML;
     const cat_name = document.querySelector("#category-options .chosen a")?.innerHTML;
@@ -99,11 +98,11 @@ function updateProductView(json) {
             addToCart(product.id, 1);
             e.preventDefault();
         });
-    st_product_clone.querySelector("#st-product-add-to-wish").addEventListener(
-    "click", (e) => {
-        addToWish(product.id);
-        e.preventDefault();
-});
+        st_product_clone.querySelector("#st-product-add-to-wish").addEventListener(
+                "click", (e) => {
+            addToWish(product.id);
+            e.preventDefault();
+        });
         st_product_clone.querySelector("#st-product-a-2").href = "single-product-view.html?id=" + product.id;
         st_product_clone.querySelector("#st-product-title-1").innerHTML = product.title;
         st_product_clone.querySelector("#st-product-price-1").innerHTML = new Intl.NumberFormat(
@@ -183,7 +182,7 @@ function updateProductView(json) {
 
 
 async function addToCart(productId, qty) {
-        console.log(productId + " " + qty);
+    console.log(productId + " " + qty);
 
     const popup = new Notification();// link notification js in single-product.html
     const response = await fetch("AddToCart?prId=" + productId + "&qty=" + qty);
@@ -208,10 +207,10 @@ async function addToCart(productId, qty) {
 
 
 async function addToWish(productId) {
-        console.log(productId );
+    console.log(productId);
 
     const popup = new Notification();// link notification js in single-product.html
-    const response = await fetch("AddToWishlist?prId=" + productId );
+    const response = await fetch("AddToWishlist?prId=" + productId);
     if (response.ok) {
         const json = await response.json(); // await response.text();
         if (json.status) {
