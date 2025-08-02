@@ -36,6 +36,7 @@ async function loadCartItems() {
                     row.querySelector("#product-price").innerText = price.toFixed(2);
                     row.querySelector("#product-qty").value = qty;
                     row.querySelector("#product-total").innerText = subTotal.toFixed(2);
+                    row.querySelector(".remove-cart-btn").setAttribute("data-cart-id", cart.id);
 
                     cartContainer.appendChild(row);
 
@@ -48,14 +49,33 @@ async function loadCartItems() {
                 document.getElementById("order-total-quantity").innerText = totalQty;
                 document.getElementById("order-total-amount").innerText = `Rs. ${totalAmount.toFixed(2)}`;
 
+                // After rendering all cart items
+                cartContainer.querySelectorAll(".remove-cart-btn").forEach(btn => {
+                    btn.addEventListener("click", async function (e) {
+                        e.preventDefault();
+                        const cartId = this.getAttribute("data-cart-id");
+                        if (!cartId) return;
+
+                        try {
+                            const response = await fetch(`DeleteCartItem?id=${cartId}`, { method: "DELETE" });
+                            const result = await response.json();
+                            if (result.status) {
+                                loadCartItems(); // Reload cart after deletion
+                            } else {
+                                popup.error({ message: result.message || "Failed to delete item." });
+                            }
+                        } catch (err) {
+                            popup.error({ message: "Error deleting cart item." });
+                        }
+                    });
+                });
             } else {
-                popup.error({ message: json.message });
+                console.error("Failed to load cart items:", json.message);
             }
         } else {
-            popup.error({ message: "Failed to fetch cart data from server." });
+            console.error("HTTP Error:", response.statusText);
         }
     } catch (error) {
-        console.error(error);
-        popup.error({ message: "Unexpected error occurred while loading cart items." });
+        console.error("Network Error:", error);
     }
 }
