@@ -1,10 +1,4 @@
 
-
-
-
-
-/* global payhere */
-
 async function loadBuyNowData() {
     console.log("JS Loaded");
     const popup = new Notification();

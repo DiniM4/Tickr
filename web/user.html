@@ -41,7 +41,7 @@
 
 
     </head>
-    <body onload="loadBrand();">
+    <body onload="loadUser();">
         <div class="container-scroller">
 
             <!-- partial:partials/_navbar.html -->
@@ -243,45 +243,38 @@
                             <div class="col-md-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h2 class="mb-4">Add Brand</h2>
-                                        <form id="brandForm" class="row g-3 mb-4">
-                                            <form id="brandForm" class="row g-3 mb-4 align-items-center">
-                                                <div class="col-sm-6">
-                                                    <label for="brandName" class="visually-hidden">Brand Name</label>
+                                        <h2 class="mb-4">All Users</h2>
 
-                                                    <input type="text" class="form-control" id="brandName" placeholder="Brand Name" required>
-                                                    <!-- Hidden field to hold selected brand ID -->
-                                                    <input type="hidden" id="brandId">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="submit" class="vs-btn style4" id="addBtn">Add</button>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button" class="vs-btn style4" id="updateBtn" disabled>Update</button>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button" class="vs-btn style4" id="deleteBtn" disabled>Delete</button>
-                                                </div>
-                                            </form>
+                                        <div class="table-responsive">
+                                            <table class="cart_table" id="userTable">
+                                                <thead>
+                                                    <tr class="cart_item">
+                                                        <th>User ID</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Email</th>
+                                                        <th>Mobile</th>
+                                                        <th>Created At</th>                                                
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="usertableBody">
+                                                    <tr  id="item-tr">
+                                                        <td id="uid">1</td>
+                                                        <td id="firstName">Kasun</td>                                                 <td id="model-name">Rolex</td>
+                                                        <td id="lastName">Perera</td>
+                                                        <td id="email">k@gmail.com</td>
+                                                        <td id="mobile">0780000000</td>
+                                                       <td id="date">0000/00/00</td>
 
-                                            <h4 class="mb-3">All Brands</h4>
-                                            <div class="table-responsive">
-                                                <table class="cart_table" id="brandTable">
-                                                    <thead>
-                                                        <tr class="cart_item">
-                                                            <th>Brand ID</th>
-                                                            <th>Brand Name</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="brandTableBody">
-                                                        <tr  id="item-tr">
-                                                            <td id="model-id">1</td>
-                                                            <td id="model-name">Rolex</td>
-                                                        </tr>
+                                                        
+                                                    </tr>
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button onclick="generateUserPDF()" class="btn btn-primary mt-3">Download User Report PDF</button>
+<button onclick="viewUserPDF()" class="btn btn-primary mt-3">View User Report</button>
+
                                         </form>
                                     </div>
                                 </div>
@@ -308,7 +301,10 @@
 </div>
 <!-- container-scroller -->
 
-<script src="assets/js/brand.js"></script>
+<script src="assets/js/user.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
 
 <!-- plugins:js -->
 <script src="assets/admin/vendors/js/vendor.bundle.base.js"></script>

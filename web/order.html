@@ -2,20 +2,13 @@
 <html lang="en">
 
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Majestic Admin Pro</title>
-        <!-- plugins:css -->
         <link rel="stylesheet" href="assets/admin/vendors/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="assets/admin/vendors/css/vendor.bundle.base.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
         <link rel="stylesheet" href="assets/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-        <!-- End plugin css for this page -->
-        <!-- inject:css -->
         <link rel="stylesheet" href="assets/admin/css/style.css">
-        <!-- endinject -->
         <link rel="shortcut icon" href="assets/admin/images/favicon.ico" />
 
         Google Fonts
@@ -27,21 +20,15 @@
         <!--==============================
                   All CSS File
               ============================== -->
-        <!-- Bootstrap -->
-        <!-- <link rel="stylesheet" href="assets/css/app.min.css"> -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <!-- Fontawesome Icon -->
         <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
-        <!-- Magnific Popup -->
         <link rel="stylesheet" href="assets/css/magnific-popup.min.css" />
-        <!-- Slick Slider -->
         <link rel="stylesheet" href="assets/css/slick.min.css" />
-        <!-- Theme Custom CSS -->
         <link rel="stylesheet" href="assets/css/style.css" />
 
 
     </head>
-    <body onload="loadBrand();">
+    <body onload="loadOrder();">
         <div class="container-scroller">
 
             <!-- partial:partials/_navbar.html -->
@@ -243,40 +230,32 @@
                             <div class="col-md-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h2 class="mb-4">Add Brand</h2>
-                                        <form id="brandForm" class="row g-3 mb-4">
-                                            <form id="brandForm" class="row g-3 mb-4 align-items-center">
-                                                <div class="col-sm-6">
-                                                    <label for="brandName" class="visually-hidden">Brand Name</label>
-
-                                                    <input type="text" class="form-control" id="brandName" placeholder="Brand Name" required>
-                                                    <!-- Hidden field to hold selected brand ID -->
-                                                    <input type="hidden" id="brandId">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="submit" class="vs-btn style4" id="addBtn">Add</button>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button" class="vs-btn style4" id="updateBtn" disabled>Update</button>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button" class="vs-btn style4" id="deleteBtn" disabled>Delete</button>
-                                                </div>
-                                            </form>
-
-                                            <h4 class="mb-3">All Brands</h4>
+                                        <h2 class="mb-4">All Orders</h2>
+                                        
                                             <div class="table-responsive">
-                                                <table class="cart_table" id="brandTable">
+                                                <table class="cart_table" id="catTable">
                                                     <thead>
                                                         <tr class="cart_item">
-                                                            <th>Brand ID</th>
-                                                            <th>Brand Name</th>
+                                                            <th>ID</th>
+                                                            <th>Product Name</th>
+                                                            <th>User Name</th>
+                                                            <th>Qty</th>
+                                                            <th>Status</th>                                            
+                                                            <th>Delivery Type</th>
+                                                            <th>Date</th>
+
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="brandTableBody">
+                                                    <tbody id="catTableBody">
                                                         <tr  id="item-tr">
-                                                            <td id="model-id">1</td>
-                                                            <td id="model-name">Rolex</td>
+                                                            <td id="p-id">1</td>
+                                                            <td id="oroduct-name">Rolex</td>
+                                                            <td id="usert-name">Rolex</td>
+                                                            <td id="qty">Rolex</td>
+                                                            <td id="status">Rolex</td>
+                                                            <td id="dilivary">Rolex</td>
+                                                            <td id="date">ddd</td>
+
                                                         </tr>
 
                                                     </tbody>
@@ -308,7 +287,7 @@
 </div>
 <!-- container-scroller -->
 
-<script src="assets/js/brand.js"></script>
+<script src="assets/js/order.js"></script>
 
 <!-- plugins:js -->
 <script src="assets/admin/vendors/js/vendor.bundle.base.js"></script>
@@ -334,4 +313,5 @@
 </body>
 
 </html>
+
 

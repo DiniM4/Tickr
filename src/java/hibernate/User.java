@@ -37,7 +37,6 @@ public class User implements Serializable {
     @Column(name = "created_at", nullable = false)
     private Date created_at;
     @Column(name = "mobile", length = 15, nullable = false)
-
     private String mobile;
 
     public User() {

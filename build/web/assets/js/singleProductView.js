@@ -71,6 +71,12 @@ async  function  loadsData() {
                         addToWish(item.id);
                         e.preventDefault();
                     });
+                    
+                       productCloneHtml.querySelector("#buynow").addEventListener(
+                            "click", (e) => {
+                        buyNow(item.id);
+                        e.preventDefault();
+                    });
                     productCloneHtml.querySelector("#simlier-product-a2").href = "single-product-view.html?id=" + item.id;
                     productCloneHtml.querySelector("#similer-product-title").innerHTML = item.title;
 
@@ -185,3 +191,16 @@ async function addToWish(productId) {
     }
 }
 
+
+
+async function buyNow(productId) {
+    // Optional: pre-check
+    const response = await fetch("LoadBuyNow?prId=" + productId);
+    const json = await response.json();
+
+    if (json.status) {
+        window.location.href = "buynow.html?id=" + productId;
+    } else {
+        alert("Product not found.");
+    }
+}
