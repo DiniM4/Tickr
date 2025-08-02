@@ -458,125 +458,50 @@
                         </div>
                     </form>
                 </div>
-                <div class="woocommerce-form-coupon-toggle">
-                    <div class="woocommerce-info">
-                        Have a coupon? <a href="#" class="showcoupon">Click here to enter your code</a>
-                    </div>
-                </div>
-                <form action="#" class="woocommerce-form-coupon bg-smoke" style="display: block;">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Write your coupon code">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="vs-btn style4">Apply coupon Code</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!--------------->
+                <!---------------> 
                 <form action="#" class="woocommerce-checkout">
                     <div class="row ">
-                        <div class="col-lg-6">
-                            <div>
-                                <h2 class="h4">Billing Details</h2>
-                            </div>
-                            <br/>
-                            <div class="row" >
-
-                                <div class="col-12 form-group">
-                                    <p>
-                                        <input type="checkbox" id="checkbox1">
-                                        <label for="checkbox1">Same as your current address?</label>
-                                    </p>
-
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <input type="text" id="first-name" class="form-control" placeholder="First Name">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <input type="text" id="last-name"  class="form-control" placeholder="Last Name">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <input type="text" id="line-one"  class="form-control" placeholder="Address Line 1">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <input type="text" id="line-two" class="form-control" placeholder="Address Line 2 ">
-                                </div>
-                                <div class="col-12 form-group">
-                                    <select class="form-select" id="city-select">
-                                        <option value="0"> Select City</option>                         
-                                    </select>
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <input type="text" id="postal-code"  class="form-control" placeholder="Postcode / Zip">
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <input type="text" id="mobile" class="form-control" placeholder="Phone number">
-                                </div>
-
-                                <div class="col-12 form-group">
-                                    <input type="text" id="email" class="form-control" placeholder="Email Address">
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <p id="ship-to-different-address">
-                                <input id="ship-to-different-address-checkbox" type="checkbox" name="ship_to_different_address" value="1">
-                                <label for="ship-to-different-address-checkbox">
-                                    Ship to a different address?
-                                    <span class="checkmark"></span>
-                                </label>
-                            </p>
-                            <div class="shipping_address">
-                                <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="checkout-box shadow p-4 rounded bg-white">
+                                <h2 class="h4 mb-4 text-theme">Billing Details</h2>
+                                <div class="row gy-3">
                                     <div class="col-12 form-group">
-                                        <select class="form-select">
-                                            <option>United Kingdom (UK)</option>
-                                            <option>United State (US)</option>
-                                            <option>Equatorial Guinea (GQ)</option>
-                                            <option>Australia (AU)</option>
-                                            <option>Germany (DE)</option>
+                                        <p>
+                                            <input type="checkbox" id="checkbox1">
+                                            <label for="checkbox1">Same as your current address?</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <input type="text" id="first-name" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <input type="text" id="last-name"  class="form-control" placeholder="Last Name">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <input type="text" id="line-one"  class="form-control" placeholder="Address Line 1">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <input type="text" id="line-two" class="form-control" placeholder="Address Line 2 ">
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <select class="form-select" id="city-select">
+                                            <option value="0"> Select City</option>                         
                                         </select>
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <input type="text" class="form-control" placeholder="First Name">
+                                        <input type="text" id="postal-code"  class="form-control" placeholder="Postcode / Zip">
                                     </div>
-                                    <div class="col-md-6 form-group">
-                                        <input type="text" class="form-control" placeholder="Last Name">
-                                    </div>
-                                    <div class="col-12 form-group">
-                                        <input type="text" class="form-control" placeholder="Your Company Name">
+                                    <div class="col-6 form-group">
+                                        <input type="text" id="mobile" class="form-control" placeholder="Phone number">
                                     </div>
                                     <div class="col-12 form-group">
-                                        <input type="text" class="form-control" placeholder="Street Address">
-                                        <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+                                        <input type="text" id="email" class="form-control" placeholder="Email Address">
                                     </div>
                                     <div class="col-12 form-group">
-                                        <input type="text" class="form-control" placeholder="Town / City">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <input type="text" class="form-control" placeholder="Country">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <input type="text" class="form-control" placeholder="Postcode / Zip">
-                                    </div>
-                                    <div class="col-12 form-group">
-                                        <input type="text" class="form-control" placeholder="Email Address">
-                                        <input type="text" class="form-control" placeholder="Phone number">
+                                        <textarea cols="20" rows="4" class="form-control"
+                                            placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 form-group">
-                                <textarea cols="20" rows="5" class="form-control"
-                                          placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                             </div>
                         </div>
                     </div>

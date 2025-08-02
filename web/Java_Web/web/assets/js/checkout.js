@@ -1,3 +1,4 @@
+// filepath: c:\Users\Malindu\Documents\Java_Web\web\assets\js\checkout.js
 /* global payhere */
 
 async function loadCheckoutData() {
@@ -133,43 +134,39 @@ async function loadCheckoutData() {
     city_select.dispatchEvent(new Event("change")); // initial trigger
 }
 
-
-
-
-
-
-payhere.onCompleted = function onCompleted(orderId) {
+payhere.onCompleted = async function onCompleted(orderId) {
     const popup = new Notification();
     popup.success({
         message: "Payment completed. Order Id " + orderId
     });
 
-    // Prepare invoice data
-    // You may want to fetch order details from server using orderId for real data
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]"); // Or use your cart variable
-    const invoiceData = {
-        orderId: orderId,
-        items: cartItems // [{title, qty, price}]
-    };
-    localStorage.setItem("invoiceData", JSON.stringify(invoiceData));
-    window.location = "invoce.html";
+    // Trigger invoice generation
+    const response = await fetch(`GenerateInvoice?orderId=${orderId}`);
+    if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `Invoice_${orderId}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+    } else {
+        popup.error({
+            message: "Failed to generate invoice."
+        });
+    }
 };
 
-
 payhere.onDismissed = function onDismissed() {
-
     console.log("Payment dismissed");
 };
 
-
 payhere.onError = function onError(error) {
-
     console.log("Error:" + error);
 };
-
-
-
-
 
 // Checkout function remains unchanged
 async function checkout() {
@@ -200,38 +197,32 @@ async function checkout() {
     let dataJSON = JSON.stringify(data);
 
     try {
+        const response = await fetch("Checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: dataJSON
+        });
 
-    const response = await fetch("Checkout", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: dataJSON
-    });
-
-
-
-    if (response.ok) {
-        const json = await response.json();
-        if (json.status) {
-            console.log(json);
-            //payhere process
-            payhere.startPayment(json.payhereJson);
-
+        if (response.ok) {
+            const json = await response.json();
+            if (json.status) {
+                console.log(json);
+                //payhere process
+                payhere.startPayment(json.payhereJson);
+            } else {
+                popup.error({
+                    message: json.message
+                });
+            }
         } else {
             popup.error({
-                message: json.message
+                message: "Something went wrong. Please try again!"
             });
         }
-    } else {
-        popup.error({
-            message: "Something went wrong c. Please try again! "
-        });
-    }
- } catch (err) {
+    } catch (err) {
         console.error("Fetch error:", err);
         popup.error({ message: "Something went wrong. Please try again!" });
     }
-
-
 }
