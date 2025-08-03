@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .invoice-table th {
+            background-color: #f2f2f2;
+        }
+        .thank-you {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .print-button {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-header">
+        <img src="assets/img/logo.svg" alt="Logo" width="150">
+        <h1>Invoice</h1>
+    </div>
+
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>Product Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="invoice-items">
+            <!-- JavaScript will populate this section with invoice items -->
+        </tbody>
+    </table>
+
+    <div class="thank-you">
+        Thank You for Your Purchase!
+    </div>
+
+    <button class="print-button" onclick="window.print();">Print Invoice</button>
+
+    <script src="assets/js/invoice.js"></script>
+</body>
+
+</html>

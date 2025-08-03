@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice - Ticker</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            background: #fff;
+        }
+        .logo {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+        .thank-you {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+        .print-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="invoice-box" id="invoice-content">
+    <img src="assets/img/logo.svg" alt="Ticker Logo" class="logo">
+    <h2>Invoice</h2>
+    <table class="table table-bordered" id="invoice-table">
+        <thead>
+            <tr>
+                <th>Product Title</th>
+                <th>Qty</th>
+                <th>Price (Rs.)</th>
+                <th>Total (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- JS will fill rows here -->
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3" class="text-end">Grand Total</th>
+                <th id="grand-total"></th>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="thank-you">Thank you for your purchase!</div>
+    <button class="btn btn-primary print-btn" onclick="downloadInvoice()">Download Invoice (PDF)</button>
+</div>
+<script src="assets/js/invoice.js"></script>
+<!-- Add jsPDF for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>

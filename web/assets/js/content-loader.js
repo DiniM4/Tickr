@@ -108,8 +108,7 @@ const data = `<div class="container">
                             <div class="col-auto d-none d-xl-block">
                                 <div class="header-btns">
                                     <button a href="shop.html" class="searchBoxTggler"><i class="fal fa-search"></i></button>
-                                    <button class="sideCartToggler"><i class="fal fa-shopping-bag"></i><span
-                                            class="button-badge">2</span></button>
+                                    <button  onclick="window.location='cart.html';" class="sideCartToggler" ><i class="fal fa-shopping-bag"></i></button>
                                     <button class="sideMenuToggler"><i class="fal fa-bars"></i></button>
                                 </div>
                             </div>
