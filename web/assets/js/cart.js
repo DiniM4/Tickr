@@ -59,3 +59,29 @@ async function loadCartItems() {
         popup.error({ message: "Unexpected error occurred while loading cart items." });
     }
 }
+
+
+
+// Delete Brand
+deleteBtn.addEventListener("click", function () {
+    const brandId = brandIdInput.value;
+
+    if (brandId && confirm("Are you sure you want to delete this brand?")) {
+        fetch("DeleteBrandServlet", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: `brandId=${brandId}`
+        })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        alert("Brand deleted successfully");
+                        resetForm();
+                        loadBrand();
+                    } else {
+                        alert("Delete failed: " + data.message);
+                    }
+                })
+                .catch(() => alert("Failed to delete brand due to network error"));
+    }
+});

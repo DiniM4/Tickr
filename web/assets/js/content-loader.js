@@ -1,6 +1,4 @@
 
-
-
 function loadHeader() {
 const data = `<div class="container">
                 <div class="header-top">
@@ -21,11 +19,8 @@ const data = `<div class="container">
                             </div>
                         </div>
                         <div class="col-auto d-flex ">
-
                             <a class="vs-btn style2 mb-3 mt-3" href="sign-up.html">Register</a>
                             <a class="vs-btn style2 mb-3 mt-3 ms-2" href="my-account.html"><i class="far fa-user-circle"></i></a>
-
-
                         </div>
                     </div>
                 </div>
@@ -42,9 +37,8 @@ const data = `<div class="container">
                             <div class="col text-end text-xl-center">
                                 <nav class="main-menu  menu-style1 d-none d-lg-block">
                                     <ul>
-                                        <li >
+                                        <li>
                                             <a href="index.html">Home</a>
-
                                         </li>
 
                                         <li class="menu-item-has-children mega-menu-wrap">
@@ -65,10 +59,6 @@ const data = `<div class="container">
                                                         <li><a href="about.html">About Us</a></li>
                                                         <li><a href="shop.html">Shop</a></li>
                                                         <li><a href="shop.html">Shop Details</a></li>
-
-
-
-
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -128,7 +118,7 @@ const data = `<div class="container">
                 </div>
             </div>`;
         document.querySelector("header").innerHTML = data;
-        }
+}
 
 function loadFooter() {
 const data = ` <div class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer-bg.jpg">
@@ -168,7 +158,6 @@ const data = ` <div class="footer-wrapper footer-layout1" data-bg-src="assets/im
                                         <p class="footer-text">Ticker is your ultimate destination for timeless sophistication and precision timekeeping.
                                             We curate a premium collection of classic and modern watches that blend luxury,
                                             innovation, and style.
-
                                         </p>
                                         <div class="social-style">
                                             <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -279,7 +268,7 @@ const data = ` <div class="footer-wrapper footer-layout1" data-bg-src="assets/im
 
 <div class="closeMask"></div>`;
         document.querySelector("footer").innerHTML = data;
-        }
+}
 
 
 async function viewCart() {
@@ -327,13 +316,13 @@ const popup = new Notification();
         } catch (err) {
 popup.error({ message: "Unexpected error loading cart!" });
         console.error(err);
-}
+        }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
 loadHeader();
         loadFooter();
-        });
+});
 
 
 

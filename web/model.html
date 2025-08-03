@@ -24,7 +24,7 @@
 
 
     </head>
-    <body onload="loadColor();">
+    <body onload="loadsModels();">
         <div class="container-scroller">
 
             <!-- partial:partials/_navbar.html -->
@@ -236,7 +236,7 @@
 
                                                     <div class="col-md-6">
                                                         <label for="brand" class="form-label" >Brand</label>
-                                                        <select class="form-select" id="brand"  onchange="loadModels();" name="brand" required>
+                                                        <select class="form-select" id="brand"  onchange="loadBrand();" name="brand" required>
                                                             <option value="0">Select Brand</option>                
                                                         </select>
                                                     </div>
@@ -258,8 +258,9 @@
                                                 <table class="cart_table" id="catTable">
                                                     <thead>
                                                         <tr class="cart_item">
-                                                            <th>Color ID</th>
-                                                            <th>Color Name</th>
+                                                            <th> ID</th>
+                                                            <th>Brand Name</th>
+                                                            <th>Model Name</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="catTableBody">
@@ -296,7 +297,7 @@
 </div>
 <!-- container-scroller -->
 
-<script src="assets/js/color.js"></script>
+<script src="assets/js/model.js"></script>
 <script src="assets/admin/vendors/js/vendor.bundle.base.js"></script>
 <script src="assets/admin/vendors/chart.js/chart.umd.js"></script>
 <script src="assets/admin/vendors/datatables.net/jquery.dataTables.js"></script>

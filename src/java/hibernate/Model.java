@@ -69,7 +69,7 @@ public class Model implements Serializable{
     @Column(name = "id")
     private int id;
     
-    @Column(name = "name",length = 20,nullable = false)
+    @Column(name = "name",length = 45,nullable = false)
     private String name;
     
     @ManyToOne
